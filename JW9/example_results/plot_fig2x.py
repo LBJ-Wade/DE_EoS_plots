@@ -72,20 +72,20 @@ ax.text(0.175,0.5,r'p = '+str(p),
         horizontalalignment='center',
         verticalalignment='center',
         transform=ax.transAxes,
-        fontsize=12)
+        fontsize=14)
 
 ax.set_xlim(-3.5,3.5)
-#ax.set_xlabel(r'$[\mu(z_i)-\mu^{\rm fid}(z_i)] / \Delta\mu(z_i)$',fontsize=11)
+ax.set_xticks([-3,-2,-1,0,1,2,3])
+ax.set_xticklabels([-3,-2,-1,0,1,2,3],fontsize=14)
 ax.set_xlabel(r'$\widetilde{\Delta\mu}$',fontsize=14)
-ax.set_ylabel(r'Counts',fontsize=14)
-ax.tick_params(axis='both',direction='in')
-# ax.text(0.925,0.875,r'(A)', 
-#         horizontalalignment='center',
-#         verticalalignment='center',
-#         transform=ax.transAxes,
-#         fontsize=14)
 
-lgd=ax.legend(loc='upper left',fontsize=11,frameon=False)
+ax.set_yticks([0,20,40,60,80,100,120,140])
+ax.set_yticklabels([0,20,40,60,80,100,120,140],fontsize=14)
+ax.set_ylabel(r'Counts',fontsize=14)
+
+ax.tick_params(axis='both',direction='in')
+
+lgd=ax.legend(loc='upper left',fontsize=14,frameon=False)
 texts = lgd.get_texts()
 for i in range(len(texts)):
 	plt.setp(texts[i],color=colors[i])
@@ -105,14 +105,19 @@ a = np.linspace(1,.4,20)
 z = 1/a-1
 
 colors=['blue','red']
-ax.hlines(-1,xmin=0,xmax=1.5,linestyle='dashed',lw=2.5,alpha=1,color=colors[0],label=r'Fiducal model')
+ax.hlines(-1,xmin=0,xmax=1.5,linestyle='dashed',lw=2,alpha=1,color=colors[0],label=r'Fiducal model')
 ax.errorbar(z,eos_SP[:,0],yerr=[eos_SP[:,0]-eos_SP[:,1],eos_SP[:,2]-eos_SP[:,0]],
 			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[1],label=r'Reconstruction')
 
+ax.set_xlim(-0.025,1.525)
 ax.set_xticks([0,0.25,0.5,0.75,1.0,1.25,1.5])
+ax.set_xticklabels([0,0.25,0.5,0.75,1.0,1.25,1.5],fontsize=14)
 ax.set_xlabel(r'$z$',fontsize=14)
+
+ax.set_yticks([-3,-2.5,-2,-1.5,-1,-0.5])
+ax.set_yticklabels([-3,-2.5,-2,-1.5,-1,0.5],fontsize=14)
 ax.set_ylabel(r'$w(z)$',fontsize=14)
-lgd=ax.legend(loc='lower left',frameon=False,fontsize=12)
+lgd=ax.legend(loc='lower left',frameon=False,fontsize=14)
 ax.tick_params(axis='both',direction='in')
 
 texts = lgd.get_texts()
@@ -121,12 +126,12 @@ for i in range(len(texts)):
 
 ###########################################################
 # final adjustments ...
-plt.subplots_adjust(wspace=0.225,
+plt.subplots_adjust(wspace=0.2,
                     hspace=0.25,
-                    left=0.075,
+                    left=0.065,
                     right=0.985,
                     top=0.975,
                     bottom=0.175)
 
-plt.savefig('w_from_mocks_v2x.pdf')
+plt.savefig('example_eos_result.pdf')
 plt.show()
