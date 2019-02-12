@@ -9,6 +9,9 @@ frac_threshold = 0.8
 def scale_factor(n,N):
 	return 1./(n/N)**0.5
 
+def Sn_upper_limit(n,N):
+	return (N/n)**0.5
+
 #####################################################################
 ax = fig.add_subplot(1,2,1)
 
@@ -112,6 +115,11 @@ ax=gca()
 ax.set_yticks([])
 ax.set_title('Data + Prior',fontsize=14)
 
+# ======================================================
+# add vertical lines to indicate the upper limits of Sn
+vlines(Sn_upper_limit(3,20),ymin=0,ymax=ymax,color='g', linestyle='--',linewidth=2)
+vlines(Sn_upper_limit(4,20),ymin=0,ymax=ymax,color='m', linestyle='--',linewidth=2)
+
 ############################################################
 ax = fig.add_subplot(1,2,2)
 
@@ -213,6 +221,10 @@ ax=gca()
 ax.set_yticks([])
 ax.set_title('Data',fontsize=14)
 
+# ======================================================
+# add vertical lines to indicate the upper limits of Sn
+vlines(Sn_upper_limit(3,20),ymin=0,ymax=ymax,color='g', linestyle='--',linewidth=2)
+vlines(Sn_upper_limit(4,20),ymin=0,ymax=ymax,color='m', linestyle='--',linewidth=2)
 ###################################################
 
 
