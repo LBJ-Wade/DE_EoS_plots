@@ -4,6 +4,18 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
+def extract_bestfit_w(likestats_file):
+	tmp = []
+	fp = open(likestats_file,'r')
+	lines = fp.readlines()
+	for i in range(len(lines)):
+		if i>=9 and i <= 28:
+			tmp.append(float(lines[i].split()[1]))
+	fp.close()
+	# print(tmp)
+	return array(tmp)
+
+prior_inv_covmat = 'CPZ_prior_smoothed_ac_0.06_sigma_mw_0.04_inv.txt'
 
 SN_dir = 'mock_JLA_20190204'
 
@@ -15,26 +27,49 @@ Result_dir = 'results.ref_20190212'
 
 SIZE=100
 
+# 20 {wi}, H0, omegac, omegab, MB
+dof = (740+1-20-4)
+
 p_value = None
-eos_chi2 = None
+tot_chi2 = None
+prior_chi2 = None
 nbad = None
 
-if os.path.isfile('CHI2-data.txt') and os.path.isfile('PVAL.txt') and os.path.isfile('NBAD.txt'):
+if os.path.isfile('CHI2-tot.txt') and \
+	os.path.isfile('CHI2-prior.txt') and \
+	os.path.isfile('PVAL.txt') and \
+	os.path.isfile('NBAD.txt'):
 	p_value = loadtxt('PVAL.txt')
-	eos_chi2= loadtxt('CHI2-data.txt')
+	tot_chi2= loadtxt('CHI2-tot.txt')
+	prior_chi2 = loadtxt('CHI2-prior.txt')
 	nbad = loadtxt('NBAD.txt')
 else:
-	if os.path.isfile('CHI2-data.txt') is False:
+	if os.path.isfile('CHI2-prior.txt') is False:
+		print('--> re-calculating prior chi2 ...')
+		print('--> loading the covariance matrix for the continuity prior ...')
+		inv_covmat = loadtxt(prior_inv_covmat)
+		prior_chi2 = []
+		for i in range(1,1+SIZE):
+			# print('--> extarcting bestfit {w_i} ...')
+			w_best = extract_bestfit_w(Result_dir+'/EoS_'+str(i)+'.likestats')
+			chi2 = matmul(matmul(w_best.reshape(1,20),inv_covmat),w_best.reshape(20,1))
+			# print('prior_chi2 = %g'%(chi2))
+			prior_chi2.append(float(chi2))
+
+		prior_chi2 = array(prior_chi2)
+		savetxt('CHI2-prior.txt',prior_chi2,fmt='%10.8f',delimiter=' ')
+
+	if os.path.isfile('CHI2-tot.txt') is False:
 		print('--> re-calculating data chi2 ...')
-		eos_chi2 = []
+		tot_chi2 = []
 		for i in range(1,1+SIZE):
 			fp = open(Result_dir+'/EoS_'+str(i)+'.likestats','r')
 			lines = fp.readlines()
-			eos_chi2.append(float(lines[0].split()[-1]))
+			tot_chi2.append(float(lines[0].split()[-1]))
 			fp.close()
 	    
-		eos_chi2 = array(eos_chi2)
-		savetxt('CHI2-data.txt',eos_chi2,fmt='%10.8f',delimiter=' ')
+		tot_chi2 = array(tot_chi2)
+		savetxt('CHI2-tot.txt',tot_chi2,fmt='%10.8f',delimiter=' ')
 	
 	if os.path.isfile('PVAL.txt') is False or os.path.isfile('NBAD.txt'):
 		print('--> re-calculating p-values ...')
@@ -54,13 +89,18 @@ else:
 		p_value = array(p_value)
 		savetxt('PVAL.txt',p_value,fmt='%10.8f',delimiter=' ')
 		savetxt('NBAD.txt',nbad,fmt='%10.8f',delimiter=' ')
-		
+
+# get REAL data chi2 by substracting prior_chi2 from tot_chi2
+data_chi2 = tot_chi2 - prior_chi2
+
+
+# start making plots ...
 
 nullfmt = NullFormatter()
 
 left, width = 0.125,0.7
-bottom, height = 0.115, 0.7
-bottom_h = left_h = left + width + 0.0
+bottom, height = left, width
+bottom_h = left_h = left + width
 
 rect_scatter = [left, bottom, width, height]
 rect_histx = [left, bottom_h, width, 0.15]
@@ -81,23 +121,24 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-axScatter.scatter(p_value,eos_chi2,marker='o',s=13,color='r',alpha=0.45)
-axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.35)
+axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.45)
+axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.35)
 
-bins=20
+bins=30
 axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
 axHistx.hist(p_value[nbad>1],bins=bins,rwidth=0.8,color='b',alpha=0.65)
 
-n,b,p=axHisty.hist(eos_chi2,bins=bins,rwidth=0.8,color='r',alpha=0.55,orientation='horizontal')
-axHisty.hist(eos_chi2[nbad>1],bins=b,rwidth=0.8,color='b',alpha=0.65,orientation='horizontal')
+n,b,p=axHisty.hist(data_chi2/dof,bins=bins,rwidth=0.8,color='r',alpha=0.55,orientation='horizontal')
+axHisty.hist(data_chi2[nbad>1]/dof,bins=b,rwidth=0.8,color='b',alpha=0.65,orientation='horizontal')
 
 axHistx.set_xlim(axHistx.get_xlim())
 axHistx.set_ylim(axHistx.get_ylim())
 axHistx.set_yticks([])
 axHisty.set_xticks([])
 
-axScatter.set_xlabel(r'$P$',fontsize=14)
-axScatter.set_ylabel(r'$\chi^2_{\rm tot}$',fontsize=14)
+axScatter.set_xlabel(r'$p$',fontsize=14)
+# axScatter.set_ylabel(r'$\chi^2_{\rm tot}$',fontsize=14)
+axScatter.set_ylabel(r'$\chi^2_{\rm reduced} \,\,\,(dof = '+str(dof)+')$',fontsize=14)
 
 fig.savefig('pvalue_vs_chi2_data.pdf')
 

@@ -49,8 +49,8 @@ else:
 nullfmt = NullFormatter()
 
 left, width = 0.125,0.7
-bottom, height = 0.115, 0.7
-bottom_h = left_h = left + width + 0.0
+bottom, height = left, 0.7
+bottom_h = left_h = left + width
 
 rect_scatter = [left, bottom, width, height]
 rect_histx = [left, bottom_h, width, 0.15]
@@ -91,7 +91,7 @@ axHistx.set_ylim(axHistx.get_ylim())
 axHistx.set_yticks([])
 axHisty.set_xticks([])
 
-axScatter.set_xlabel(r'$P$',fontsize=14)
+axScatter.set_xlabel(r'$p$',fontsize=14)
 axScatter.set_ylabel(r'$\chi^2_{\mathbf{w}}=(\mathbf{w}+1)\cdot\mathbf{C}^{-1}_{\mathbf{w}}\cdot(\mathbf{w}+1)$',fontsize=14)
 
 fig.savefig('pvalue_vs_chi2_w.pdf')
