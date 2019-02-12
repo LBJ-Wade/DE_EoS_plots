@@ -4,8 +4,9 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
-EoS_dir = 'EoS.old'
-Result_dir = 'results.old'
+SN_dir = 'mock_JLA_20190204'
+EoS_dir = 'EoS.ref_20190212'
+Result_dir = 'results.ref_20190212'
 
 p_value = None
 eos_chi2 = None
@@ -20,7 +21,7 @@ else:
 	eos_chi2 = []
 	nbad = []
 	for i in range(1,101):
-		sn_file = 'mock_JLA_EoS_1000/MOCK_JLA_'+str(i)+'.txt'
+		sn_file = SN_dir + '/MOCK_JLA_'+str(i)+'.txt'
 		sn = read_jla_mock(sn_file)
 		dmu = (sn[:,1]-sn[:,3])/sn[:,2]
 		s,p = kstest(dmu,'norm')
@@ -41,8 +42,8 @@ else:
 	nbad = array(nbad)
 	p_value = array(p_value)
 	eos_chi2 = array(eos_chi2)
-	savetxt('PVAL.txt',p1_value,fmt='%10.8f',delimiter=' ')
-	savetxt('CHI2.txt',eos1_chi2,fmt='%10.8f',delimiter=' ')
+	savetxt('PVAL.txt',p_value,fmt='%10.8f',delimiter=' ')
+	savetxt('CHI2.txt',eos_chi2,fmt='%10.8f',delimiter=' ')
 	savetxt('NBAD.txt',nbad,fmt='%10.8f',delimiter=' ')
 
 nullfmt = NullFormatter()
@@ -73,9 +74,10 @@ axHisty.yaxis.set_major_formatter(nullfmt)
 # axScatter.scatter(p1_value[nbad<=1],eos1_chi2[nbad<=1],s=15,alpha=0.55)
 axScatter.scatter(p_value,eos_chi2,marker='o',s=13,color='r',alpha=0.45)
 axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.35)
+
 # add a vertical dashed line to indicate the reduced chi2=1
-axScatter.hlines(19,xmin=0,xmax=1,linestyles='dashed',alpha=0.75)
-axScatter.text(0,17,r'reduced $\chi^2_{\mathbf{w}}=1 \,\,(dof=19)$',fontsize=14)
+# axScatter.hlines(19,xmin=0,xmax=1,linestyles='dashed',alpha=0.75)
+# axScatter.text(0,17,r'reduced $\chi^2_{\mathbf{w}}=1 \,\,(dof=19)$',fontsize=14)
 
 bins=30
 axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
@@ -92,7 +94,7 @@ axHisty.set_xticks([])
 axScatter.set_xlabel(r'$P$',fontsize=14)
 axScatter.set_ylabel(r'$\chi^2_{\mathbf{w}}=(\mathbf{w}+1)\cdot\mathbf{C}^{-1}_{\mathbf{w}}\cdot(\mathbf{w}+1)$',fontsize=14)
 
-fig.savefig('pvalue_vs_chi2_x.pdf')
+fig.savefig('pvalue_vs_chi2_w.pdf')
 
 show()
 

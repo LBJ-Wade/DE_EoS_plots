@@ -4,8 +4,14 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
-EoS_dir = 'EoS.old'
-Result_dir = 'results.old'
+
+SN_dir = 'mock_JLA_20190204'
+
+# EoS_dir = 'EoS.old'
+EoS_dir = 'EoS.ref_20190212'
+
+# Result_dir = 'results.old'
+Result_dir = 'results.ref_20190212'
 
 SIZE=100
 
@@ -24,7 +30,7 @@ else:
 		for i in range(1,1+SIZE):
 			fp = open(Result_dir+'/EoS_'+str(i)+'.likestats','r')
 			lines = fp.readlines()
-			eos1_chi2.append(float(lines[0].split()[-1]))
+			eos_chi2.append(float(lines[0].split()[-1]))
 			fp.close()
 	    
 		eos_chi2 = array(eos_chi2)
@@ -75,13 +81,10 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-# print('len(p1_value) = ', len(p1_value))
-# print('len(eos1_chi2) = ', len(eos1_chi2))
-
 axScatter.scatter(p_value,eos_chi2,marker='o',s=13,color='r',alpha=0.45)
 axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.35)
 
-bins=30
+bins=20
 axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
 axHistx.hist(p_value[nbad>1],bins=bins,rwidth=0.8,color='b',alpha=0.65)
 
