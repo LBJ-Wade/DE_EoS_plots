@@ -38,8 +38,8 @@ for i in range(N1):
         w = loadtxt('EoS_sm_0.08_inv_err/eos_'+str(ids[cnt-1])+'.txt')
         ax.errorbar(z+dz,w[:,0],yerr=w[:,1],capsize=2,color=colors[1],alpha=alpha)
 
-        ax.hlines(-1,xmin=0,xmax=1.5,linestyles='dashed',linewidth=1)
-        ax.set_xlim(0-10*dz,1.5+dz*10)
+        ax.hlines(-1,xmin=0,xmax=zmax,linestyles='dashed',linewidth=1)
+        ax.set_xlim(0-5*dz,zmax+dz*5)
         ax.set_ylim(-3.5,0.5)
 
         if i == N1-1:
