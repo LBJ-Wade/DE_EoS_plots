@@ -1,0 +1,143 @@
+Parameter autocorrelation lengths (effective number of samples N_eff = tot weight/weight length)
+
+            Weight Length   Sample length           N_eff
+H0                   3.84            1.80          125104
+MB                   3.88            1.82          123665
+omegabh2             3.41            1.60          140777
+omegach2             3.40            1.60          141065
+DDE_w0               3.36            1.58          142765
+DDE_w1               3.37            1.58          142342
+DDE_w2               3.37            1.58          142476
+DDE_w3               3.41            1.60          140816
+DDE_w4               3.51            1.65          136737
+DDE_w5               3.75            1.76          127992
+DDE_w6               3.86            1.81          124353
+DDE_w7               3.89            1.82          123498
+DDE_w8               3.82            1.79          125536
+DDE_w9               3.76            1.76          127718
+DDE_w10              3.52            1.65          136241
+DDE_w11              3.45            1.62          139090
+DDE_w12              3.73            1.75          128519
+DDE_w13              3.92            1.84          122457
+DDE_w14              3.97            1.86          120949
+DDE_w15              3.97            1.86          120931
+DDE_w16              4.00            1.88          119844
+DDE_w17              3.99            1.87          120353
+DDE_w18              3.99            1.87          120412
+DDE_w19              3.97            1.86          120843
+
+
+mean convergence stats using remaining chains
+param sqrt(var(chain mean)/mean(chain var))
+
+H0            0.0184  H_0
+MB            0.0170  M_B
+omegabh2      0.0206  \omega_b
+omegach2      0.0732  \omega_c
+DDE_w0        0.0302  w_0
+DDE_w1        0.0375  w_1
+DDE_w2        0.0389  w_2
+DDE_w3        0.0569  w_3
+DDE_w4        0.0627  w_4
+DDE_w5        0.0351  w_5
+DDE_w6        0.0240  w_6
+DDE_w7        0.0219  w_7
+DDE_w8        0.0132  w_8
+DDE_w9        0.0113  w_9
+DDE_w10       0.0187  w_{10}
+DDE_w11       0.0286  w_{11}
+DDE_w12       0.0395  w_{12}
+DDE_w13       0.0446  w_{13}
+DDE_w14       0.0419  w_{14}
+DDE_w15       0.0406  w_{15}
+DDE_w16       0.0412  w_{16}
+DDE_w17       0.0437  w_{17}
+DDE_w18       0.0447  w_{18}
+DDE_w19       0.0471  w_{19}
+
+var(mean)/mean(var) for eigenvalues of covariance of means of orthonormalized parameters
+  1     -0.00000
+  2     -0.00000
+  3     -0.00000
+  4     -0.00000
+  5     -0.00000
+  6     -0.00000
+  7     -0.00000
+  8     -0.00000
+  9     -0.00000
+ 10     -0.00000
+ 11      0.00000
+ 12      0.00000
+ 13      0.00000
+ 14      0.00000
+ 15      0.00000
+ 16      0.00000
+ 17      0.00000
+ 18      0.00000
+ 19      0.00000
+ 20      0.00000
+ 21      0.00000
+ 22      0.01657
+ 23      0.02253
+ 24      0.02852
+
+Split tests: rms_n([delta(upper/lower quantile)]/sd) n={2,3,4}, limit=95%:
+i.e. mean sample splitting change in the quantiles in units of the st. dev.
+
+H0           0.0377   0.0352   0.0421 upper
+H0           0.0110   0.0346   0.0550 lower
+MB           0.0247   0.0254   0.0268 upper
+MB           0.0011   0.0305   0.0586 lower
+omegabh2     0.0299   0.0605   0.0843 upper
+omegabh2     0.0120   0.0400   0.0324 lower
+omegach2     0.1330   0.1728   0.1735 upper
+omegach2     0.0425   0.0166   0.0797 lower
+DDE_w0       0.0816   0.0636   0.0920 upper
+DDE_w0       0.0216   0.0259   0.0508 lower
+DDE_w1       0.0929   0.0719   0.0929 upper
+DDE_w1       0.0041   0.0218   0.0411 lower
+DDE_w2       0.0950   0.0558   0.1113 upper
+DDE_w2       0.0032   0.0245   0.0539 lower
+DDE_w3       0.0465   0.0251   0.0713 upper
+DDE_w3       0.0027   0.0347   0.0772 lower
+DDE_w4       0.0486   0.0934   0.0788 upper
+DDE_w4       0.0368   0.1129   0.1476 lower
+DDE_w5       0.0560   0.0593   0.0728 upper
+DDE_w5       0.0873   0.1161   0.1659 lower
+DDE_w6       0.0073   0.0247   0.0148 upper
+DDE_w6       0.0733   0.0687   0.1084 lower
+DDE_w7       0.0144   0.0212   0.0180 upper
+DDE_w7       0.0332   0.0274   0.0592 lower
+DDE_w8       0.0181   0.0098   0.0198 upper
+DDE_w8       0.0418   0.0572   0.0506 lower
+DDE_w9       0.0141   0.0245   0.0189 upper
+DDE_w9       0.0495   0.0669   0.0592 lower
+DDE_w10      0.0266   0.0035   0.0333 upper
+DDE_w10      0.0318   0.0702   0.0607 lower
+DDE_w11      0.0594   0.0824   0.0751 upper
+DDE_w11      0.0583   0.0474   0.0702 lower
+DDE_w12      0.0223   0.0691   0.0689 upper
+DDE_w12      0.0834   0.1125   0.1015 lower
+DDE_w13      0.0179   0.0573   0.0634 upper
+DDE_w13      0.0674   0.1062   0.0993 lower
+DDE_w14      0.0260   0.0321   0.0458 upper
+DDE_w14      0.0402   0.0740   0.0817 lower
+DDE_w15      0.0248   0.0296   0.0419 upper
+DDE_w15      0.0377   0.0789   0.0861 lower
+DDE_w16      0.0047   0.0136   0.0222 upper
+DDE_w16      0.0028   0.0431   0.0846 lower
+DDE_w17      0.0009   0.0109   0.0142 upper
+DDE_w17      0.0072   0.0137   0.0642 lower
+DDE_w18      0.0047   0.0098   0.0181 upper
+DDE_w18      0.0052   0.0144   0.0599 lower
+DDE_w19      0.0006   0.0114   0.0209 upper
+DDE_w19      0.0080   0.0144   0.0490 lower
+
+Raftery&Lewis statistics
+
+chain  markov_thin  indep_thin    nburn
+   0          37          37         111
+   1          37          37          74
+   2          29          29          87
+   3          46          46         138
+

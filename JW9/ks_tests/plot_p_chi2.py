@@ -4,6 +4,8 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
+SIZE=400
+
 SN_dir = 'mock_JLA_20190204'
 EoS_dir = 'EoS.ref_20190212'
 Result_dir = 'results.ref_20190212'
@@ -20,7 +22,7 @@ else:
 	p_value = []
 	eos_chi2 = []
 	nbad = []
-	for i in range(1,101):
+	for i in range(1,1+SIZE):
 		sn_file = SN_dir + '/MOCK_JLA_'+str(i)+'.txt'
 		sn = read_jla_mock(sn_file)
 		dmu = (sn[:,1]-sn[:,3])/sn[:,2]
@@ -73,7 +75,7 @@ axHisty.yaxis.set_major_formatter(nullfmt)
 # the scatter plot
 # axScatter.scatter(p1_value[nbad<=1],eos1_chi2[nbad<=1],s=15,alpha=0.55)
 axScatter.scatter(p_value,eos_chi2,marker='o',s=13,color='r',alpha=0.45)
-axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.35)
+axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.45)
 
 # add a vertical dashed line to indicate the reduced chi2=1
 # axScatter.hlines(19,xmin=0,xmax=1,linestyles='dashed',alpha=0.75)

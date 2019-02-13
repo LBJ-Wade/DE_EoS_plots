@@ -25,7 +25,7 @@ EoS_dir = 'EoS.ref_20190212'
 # Result_dir = 'results.old'
 Result_dir = 'results.ref_20190212'
 
-SIZE=100
+SIZE=400
 
 # 20 {wi}, H0, omegac, omegab, MB
 dof = (740+1-20-4)
@@ -76,7 +76,7 @@ else:
 		p_value = []
 		nbad = []
 		for i in range(1,1+SIZE):
-			sn_file = 'mock_JLA_EoS_1000/MOCK_JLA_'+str(i)+'.txt'
+			sn_file = SN_dir+'/MOCK_JLA_'+str(i)+'.txt'
 			sn = read_jla_mock(sn_file)
 			dmu = (sn[:,1]-sn[:,3])/sn[:,2]
 			s,p = kstest(dmu,'norm')
@@ -122,7 +122,7 @@ axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
 axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.45)
-axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.35)
+axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.45)
 
 bins=30
 axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
