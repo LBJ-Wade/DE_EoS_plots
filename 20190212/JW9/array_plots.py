@@ -9,10 +9,10 @@ z = 1/a-1
 colors=['g','r']
 alpha=0.8
 
-fig = figure(figsize=(9,10))
+fig = figure(figsize=(9,6))
 
 N_TOT =100
-N1 = 7   # num of rows
+N1 = 5   # num of rows
 N2 = 4  #  num of cols
 
 ids = []
@@ -61,7 +61,7 @@ for i in range(N1):
 
         cnt += 1
 
-fig.subplots_adjust(wspace=0.,hspace=0,bottom=0.05,top=0.995,left=0.05,right=0.995)
+fig.subplots_adjust(wspace=0.,hspace=0,bottom=0.075,top=0.995,left=0.05,right=0.995)
 
 fig.savefig('EoS_list.pdf')
 
