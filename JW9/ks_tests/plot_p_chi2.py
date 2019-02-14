@@ -4,7 +4,7 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
-SIZE=400
+SIZE=690
 
 SN_dir = 'mock_JLA_20190204'
 EoS_dir = 'EoS.ref_20190212'
@@ -19,39 +19,52 @@ if os.path.isfile('CHI2.txt') and os.path.isfile('PVAL.txt') and os.path.isfile(
 	eos_chi2= loadtxt('CHI2.txt')
 	nbad = loadtxt('NBAD.txt')
 else:
-	p_value = []
-	eos_chi2 = []
-	nbad = []
-	for i in range(1,1+SIZE):
-		sn_file = SN_dir + '/MOCK_JLA_'+str(i)+'.txt'
-		sn = read_jla_mock(sn_file)
-		dmu = (sn[:,1]-sn[:,3])/sn[:,2]
-		s,p = kstest(dmu,'norm')
-#	    p1_value.append(p)
+	if os.path.isfile('CHI2.txt') is False:
+		print('--> re-computing chi2-w ...')
+		eos_chi2 = []
+		for i in range(1,1+SIZE):
+			eos_file = EoS_dir+'/eos_'+str(i)+'.txt'
+			cov_file= Result_dir+'/EoS_'+str(i)+'.covmat'
+			eos = loadtxt(eos_file)
+			covmat = loadtxt(cov_file)
+			icovmat = inv(covmat[4:,4:])
+			deos = eos[:,0]+1
+			chi2 = matmul(matmul(deos.reshape(1,20),icovmat),deos.reshape(20,1))
+			eos_chi2.append(float(chi2))
+		eos_chi2 = array(eos_chi2)
+		savetxt('CHI2.txt',eos_chi2,fmt='%10.8f',delimiter=' ')
+	else:
+		eos_chi2= loadtxt('CHI2.txt')
+	
+	if os.path.isfile('PVAL.txt') is False:
+		print('--> re-computing p-values ...')
+		p_value = []
+		for i in range(1,1+SIZE):
+			sn_file = SN_dir + '/MOCK_JLA_'+str(i)+'.txt'
+			sn = read_jla_mock(sn_file)
+			dmu = (sn[:,1]-sn[:,3])/sn[:,2]
+			s,p = kstest(dmu,'norm')
+			p_value.append(p)
+		p_value = array(p_value)
+		savetxt('PVAL.txt',p_value,fmt='%10.8f',delimiter=' ')
+	else:
+		p_value = loadtxt('PVAL.txt')
 
-		eos_file = EoS_dir+'/eos_'+str(i)+'.txt'
-		cov_file= Result_dir+'/EoS_'+str(i)+'.covmat'
-		eos = loadtxt(eos_file)
-		covmat = loadtxt(cov_file)
-		icovmat = inv(covmat[4:,4:])
-		deos = eos[:,0]+1
-		chi2 = matmul(matmul(deos.reshape(1,20),icovmat),deos.reshape(20,1))
-
-		nbad.append( sum( abs( (eos[:,0]+1)/eos[:,1] ) >= 1.0 ) )
-		p_value.append(p)
-		eos_chi2.append(float(chi2))
-	    
-	nbad = array(nbad)
-	p_value = array(p_value)
-	eos_chi2 = array(eos_chi2)
-	savetxt('PVAL.txt',p_value,fmt='%10.8f',delimiter=' ')
-	savetxt('CHI2.txt',eos_chi2,fmt='%10.8f',delimiter=' ')
-	savetxt('NBAD.txt',nbad,fmt='%10.8f',delimiter=' ')
+	if os.path.isfile('NBAD.txt') is False:
+		print('--> re-computing NBAD ...')
+		nbad = []
+		for i in range(1,1+SIZE):
+			eos = loadtxt(EoS_dir+'/eos_'+str(i)+'.txt')
+			nbad.append( sum( abs( (eos[:,0]+1)/eos[:,1] ) >= 1.0 ) )
+		nbad = array(nbad)
+		savetxt('NBAD.txt',nbad,fmt='%10.8f',delimiter=' ')
+	else:
+		nbad = loadtxt('NBAD.txt')
 
 nullfmt = NullFormatter()
 
 left, width = 0.125,0.7
-bottom, height = left, 0.7
+bottom, height = left, width
 bottom_h = left_h = left + width
 
 rect_scatter = [left, bottom, width, height]
@@ -76,6 +89,14 @@ axHisty.yaxis.set_major_formatter(nullfmt)
 # axScatter.scatter(p1_value[nbad<=1],eos1_chi2[nbad<=1],s=15,alpha=0.55)
 axScatter.scatter(p_value,eos_chi2,marker='o',s=13,color='r',alpha=0.45)
 axScatter.scatter(p_value[nbad>1],eos_chi2[nbad>1],marker='x',s=20,color='b',alpha=0.45)
+
+# xticks=[0,0.2,0.4,0.6,0.8,1.0]
+# yticks=[0.0,2.5,5.0,7.5,10,12.5,15,17.5]
+# axScatter.set_xticks(xticks)
+# axScatter.set_yticks(yticks)
+# axScatter.set_xticklabels(xticks,fontsize=13)
+# axScatter.set_yticklabels(yticks,fontsize=13)
+
 
 # add a vertical dashed line to indicate the reduced chi2=1
 # axScatter.hlines(19,xmin=0,xmax=1,linestyles='dashed',alpha=0.75)

@@ -2,7 +2,7 @@ from pylab import *
 
 # EoS_dir = 'EoS.inv_err'
 
-tot_size = 350
+tot_size = 690
 
 EoS_dir = 'EoS.ref'
 

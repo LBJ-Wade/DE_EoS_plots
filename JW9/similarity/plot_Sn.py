@@ -1,8 +1,10 @@
 from pylab import *
 
-bins=15
+bins=30
 alpha = 0.65
-fig = figure(figsize=(11,4.5))
+fig = figure(figsize=(9,4))
+
+SIZE = 690
 
 frac_threshold = 0.8
 
@@ -32,8 +34,9 @@ frac4 = []
 frac5 = []
 frac6 = []
 
-for i in range(1,101):
-    w = loadtxt('EoS.old/eos_'+str(i)+'.txt')
+for i in range(1,1+SIZE):
+    # w = loadtxt('EoS.old/eos_'+str(i)+'.txt')
+    w = loadtxt('../ks_tests/EoS.ref_20190212/eos_'+str(i)+'.txt')
     dw= w[:,0]+1
     dw /= norm(dw)
     f0_ = matmul(dw,evec[19,:])
@@ -96,24 +99,25 @@ f6 = sum(frac6>frac_threshold)/100.
 n1,b1,h1=hist(frac3, bins=bins, density=False, histtype='bar', color='g', label=r'3 WPCs',alpha=alpha)
 n2,b2,h2=hist(frac4, bins=bins, density=False, histtype='bar', color='m', label=r'4 WPCs',alpha=alpha)
 # n3,b3,h3=hist(frac6, bins=bins, density=False, histtype='bar', color='k', label=r'6 WPCs',alpha=alpha)
-n1_,b1_,h1_=hist(frac3_*1e1, bins=bins, density=False, color='b', histtype='step', lw=2,label=r'3 BPCs')
-n2_,b2_,h2_=hist(frac4_*1e1, bins=bins, density=False, color='r', histtype='step', lw=2,label=r'4 BPCs')
-text(0.5,15,r'$\times 10$',fontsize=14,color='b')
-text(0.5,11,r'$\times 10$',fontsize=14,color='r')
+n1_,b1_,h1_=hist(frac3_*1e1, bins=bins, density=False, color='r', histtype='step', lw=2,label=r'3 BPCs')
+n2_,b2_,h2_=hist(frac4_*1e1, bins=bins, density=False, color='b', histtype='step', lw=2,label=r'4 BPCs')
 
-lgd=legend(loc='upper center', ncol=2, frameon=False,fontsize=13)
+lgd=legend(loc='upper center', ncol=2, frameon=False,fontsize=12)
 texts = lgd.get_texts()
 colors=['g','m','r','b']
 for i in range(len(texts)):
-    plt.setp(texts[i],fontsize=13,color=colors[i])
+    plt.setp(texts[i],fontsize=12,color=colors[i])
 
-ymax=1.05*max(n1_.max(),n2_.max(),n1.max(),n2.max())
+ymax=1.2*max(n1_.max(),n2_.max(),n1.max(),n2.max())
 ylim(0,ymax)
 # xlim(0,1.0)
 xlabel(r'$S_{20}^{3,4}$',fontsize=14)
 ax=gca()
 ax.set_yticks([])
 ax.set_title('Data + Prior',fontsize=14)
+
+text(0.4,0.4*ymax,r'$\times 10$',fontsize=12,color='r')
+text(0.4,0.3*ymax,r'$\times 10$',fontsize=12,color='b')
 
 # ======================================================
 # add vertical lines to indicate the upper limits of Sn
@@ -140,8 +144,9 @@ frac4 = []
 frac5 = []
 frac6 = []
 
-for i in range(1,101):
-    w = loadtxt('EoS.old/eos_'+str(i)+'.txt')
+for i in range(1,1+SIZE):
+    # w = loadtxt('EoS.old/eos_'+str(i)+'.txt')
+    w = loadtxt('../ks_tests/EoS.ref_20190212/eos_'+str(i)+'.txt')
     dw= w[:,0]+1
     dw /= norm(dw)
     f0_ = matmul(dw,evec[19,:])
@@ -207,11 +212,11 @@ n1_,b1_,h1_=hist(frac3_, bins=bins, density=False, color='r', histtype='step', l
 n2_,b2_,h2_=hist(frac4_, bins=bins, density=False, color='b', histtype='step', lw=2,label=r'4 WPCs')
 
 
-lgd=legend(loc='upper center', ncol=2, frameon=False,fontsize=13)
+lgd=legend(loc='upper center', ncol=2, frameon=False,fontsize=12)
 texts = lgd.get_texts()
 colors=['g','m','r','b']
 for i in range(len(texts)):
-    plt.setp(texts[i],fontsize=13,color=colors[i])
+    plt.setp(texts[i],fontsize=12,color=colors[i])
 
 ymax=1.2*max(n1_.max(),n2_.max(),n1.max(),n2.max())
 ylim(0,ymax)
@@ -229,7 +234,7 @@ vlines(Sn_upper_limit(4,20),ymin=0,ymax=ymax,color='m', linestyle='--',linewidth
 
 
 f=gcf()
-f.subplots_adjust(left=0.025,right=0.975,bottom=0.145,top=0.9,wspace=0.075)
+f.subplots_adjust(left=0.015,right=0.985,bottom=0.145,top=0.9,wspace=0.05)
 
 savefig('Sn_JLA_WMAP9_new.pdf')
 
