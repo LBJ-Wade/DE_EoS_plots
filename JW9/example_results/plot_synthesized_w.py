@@ -87,12 +87,9 @@ max_idx = 4
 alpha = np.loadtxt('alpha_SP.txt')
 vecs = np.loadtxt('Data_SP_vecs.txt')
 w,werr=w_fun(alpha[:,0],alpha[:,1],vecs,max_idx=max_idx)
-ax.errorbar(z+dz,w,yerr=werr,capsize=3,capthick=2,
-    elinewidth=1.5,marker='s',markersize=3,label='WPC1-4')
 
-
-ax.fill_between(z,y1=eos_SP[:,1],y2=eos_SP[:,2],color='green',alpha=0.25)
-
+ax.fill_between(z,y1=eos_SP[:,1],y2=eos_SP[:,2],label='Original result',color='r',alpha=0.5)
+ax.errorbar(z+dz,w,yerr=werr,capsize=4,capthick=2,elinewidth=2,color='b',marker='D',markersize=4,label='Synthesized from WPC1-4')
 ax.set_xlim(-0.025,1.525)
 ax.set_ylim(-3.5,0)
 ax.set_xlabel(r'$z$',fontsize=14)
@@ -110,18 +107,18 @@ for i in range(len(ticks)): ticklabels.append(str(ticks[i]))
 ax.set_yticks(ticks)
 ax.set_yticklabels(ticklabels,fontsize=13)
 
-ax.hlines(-1,xmin=0,xmax=1.5,linestyle='dashed',lw=hlw,alpha=0.65)
+ax.hlines(-1,xmin=0,xmax=1.5,linestyle='dashed',lw=hlw,alpha=0.5)
 
 lgd=ax.legend(loc='lower left',ncol=1,frameon=False,fontsize=lgd_size)
 texts = lgd.get_texts()
-for i in range(len(texts)):
-    plt.setp(texts[i],color=colors[i])
+plt.setp(texts[0],color='r')
+plt.setp(texts[1],color='b')
 
 
 ###########################################################
 plt.subplots_adjust(wspace=0.175,
                     # hspace=0.225,
-                    hspace=0.,
+                    hspace=0.0,
                     left=0.15,
                     right=0.95,
                     top=0.975,

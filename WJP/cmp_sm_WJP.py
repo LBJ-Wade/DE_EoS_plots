@@ -20,7 +20,7 @@ dz=0.005
 ax = fig.gca()
 
 w = loadtxt('EoS_sm_0.02/eos_'+str(ids[cnt-1])+'.txt')
-ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[0]],alpha=0.4)
+ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[0]],alpha=0.5)
 
 w = loadtxt('EoS_sm_0.04/eos_'+str(ids[cnt-1])+'.txt')
 ax.errorbar(z-dz,w[:,0],yerr=w[:,1],fmt='d-.',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.04$',color=colors[cid[1]])
