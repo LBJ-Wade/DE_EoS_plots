@@ -1,10 +1,10 @@
 from pylab import *
 
-bins=30
+bins=25
 alpha = 0.65
 fig = figure(figsize=(9,4))
 
-SIZE = 690
+SIZE = 1000
 
 frac_threshold = 0.8
 

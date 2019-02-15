@@ -25,7 +25,7 @@ EoS_dir = 'EoS.ref_20190212'
 # Result_dir = 'results.old'
 Result_dir = 'results.ref_20190212'
 
-SIZE=690
+SIZE=1000
 
 # 20 {wi}, H0, omegac, omegab, MB
 dof = (740+1-20-4)

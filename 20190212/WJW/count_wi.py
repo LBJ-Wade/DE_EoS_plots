@@ -1,6 +1,7 @@
 import os, sys
 from pylab import *
 
+SIZE = 337
 EoS_dir = []
 
 if len(sys.argv) < 2:
@@ -17,7 +18,7 @@ for k in range(len(EoS_dir)):
 	T2_1sigma = []
 	T2_2sigma = []
 
-	for i in range(1,100):
+	for i in range(1,1+SIZE):
 		w = loadtxt(EoS_dir[k]+'/eos_'+str(i)+'.txt')
 		T1_1sigma.append(sum( abs((w[:,0]+1)/w[:,1]) >= 1 ))
 		T1_2sigma.append(sum( abs((w[:,0]+1)/w[:,1]) >= 2 ))
@@ -48,9 +49,9 @@ for k in range(len(EoS_dir)):
 
 
 	print('--> 1 sigma level:')
-	print(sum(T1_1sigma>0))
-	print(sum(T2_1sigma>0))
+	print(round(sum(T1_1sigma>0)/SIZE,4))
+	print(round(sum(T2_1sigma>0)/SIZE,4))
 
 	print('--> 2 sigma level:')
-	print(sum(T1_2sigma>0))
-	print(sum(T2_2sigma>0))
+	print(round(sum(T1_2sigma>0)/SIZE,4))
+	print(round(sum(T2_2sigma>0)/SIZE,4))

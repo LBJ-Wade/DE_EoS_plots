@@ -4,7 +4,7 @@ from scipy.stats import kstest
 from matplotlib.ticker import NullFormatter
 from ReadMock import *
 
-SIZE=690
+SIZE=1000
 
 SN_dir = 'mock_JLA_20190204'
 EoS_dir = 'EoS.ref_20190212'
