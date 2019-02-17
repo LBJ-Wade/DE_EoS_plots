@@ -29,7 +29,7 @@ w = loadtxt('EoS_sm_0.08/eos_'+str(ids[cnt-1])+'.txt')
 ax.errorbar(z+dz,w[:,0],yerr=w[:,1],fmt='v--',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.08$',color=colors[cid[2]])
 
 
-ax.hlines(-1,xmin=0,xmax=1.7,linestyles='dashed',color='grey',linewidth=1)
+ax.hlines(-1,xmin=0,xmax=1.7,linestyles='dashed',color='k',linewidth=1.5)
 
 ax.set_xlim(0-5*dz,1.7+5*dz)
 ax.set_ylim(-2.5,0)

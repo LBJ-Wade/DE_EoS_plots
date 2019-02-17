@@ -66,6 +66,8 @@ ax.set_yticklabels(ticklabels,fontsize=12)
 ax.tick_params(axis='both',direction='in')
 ax.hlines(0,xmin=0,xmax=1.5,linestyle='dashed',lw=hlw,alpha=0.65)
 
+ax.text(0.3,-0.75,'Data + Prior eigenmodes',fontsize=lgd_size+2)
+
 lgd=ax.legend(loc='upper center',ncol=2,frameon=False,fontsize=lgd_size)
 texts = lgd.get_texts()
 for i in range(len(texts)):
@@ -124,5 +126,5 @@ plt.subplots_adjust(wspace=0.175,
                     top=0.975,
                     bottom=0.1)
 
-plt.savefig('synthesis_EoS_v3.pdf')
+plt.savefig('synthesis_EoS.pdf')
 plt.show()

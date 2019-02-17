@@ -114,7 +114,7 @@ ylim(0,ymax)
 xlabel(r'$S_{20}^{3,4}$',fontsize=14)
 ax=gca()
 ax.set_yticks([])
-ax.set_title('Data + Prior',fontsize=14)
+ax.set_title('Data + Prior eigenmodes',fontsize=14)
 
 text(0.4,0.4*ymax,r'$\times 10$',fontsize=12,color='r')
 text(0.4,0.3*ymax,r'$\times 10$',fontsize=12,color='b')
@@ -204,12 +204,16 @@ f4 = sum(frac4>frac_threshold)/100.
 f5 = sum(frac5>frac_threshold)/100.
 f6 = sum(frac6>frac_threshold)/100.
 
-# n1,b1,h1=hist(frac3, bins=bins, density=False, histtype='bar', color='g', label=r'3 BPCs, '+r'$F_3('+str(frac_threshold)+')='+str(round(f3,2))+'$',alpha=alpha)
-# n2,b2,h2=hist(frac4, bins=bins, density=False, histtype='bar', color='m', label=r'4 BPCs, '+r'$F_4('+str(frac_threshold)+')='+str(round(f4,2))+'$',alpha=alpha)
-n1,b1,h1=hist(frac3, bins=bins, density=False, histtype='bar', color='g', label=r'3 BPCs',alpha=alpha)
-n2,b2,h2=hist(frac4, bins=bins, density=False, histtype='bar', color='m', label=r'4 BPCs',alpha=alpha)
-n1_,b1_,h1_=hist(frac3_, bins=bins, density=False, color='r', histtype='step', lw=2,label=r'3 WPCs')
-n2_,b2_,h2_=hist(frac4_, bins=bins, density=False, color='b', histtype='step', lw=2,label=r'4 WPCs')
+# n1,b1,h1=hist(frac3, bins=bins, density=False, histtype='bar', color='g', label=r'3 BPCs',alpha=alpha)
+# n2,b2,h2=hist(frac4, bins=bins, density=False, histtype='bar', color='m', label=r'4 BPCs',alpha=alpha)
+# n1_,b1_,h1_=hist(frac3_, bins=bins, density=False, color='r', histtype='step', lw=2,label=r'3 WPCs')
+# n2_,b2_,h2_=hist(frac4_, bins=bins, density=False, color='b', histtype='step', lw=2,label=r'4 WPCs')
+
+
+n1_,b1_,h1_=hist(frac3_, bins=bins, density=False, color='g', histtype='bar', label=r'3 WPCs',alpha=alpha)
+n2_,b2_,h2_=hist(frac4_, bins=bins, density=False, color='m', histtype='bar', label=r'4 WPCs',alpha=alpha)
+n1,b1,h1=hist(frac3, bins=bins, density=False, histtype='step', lw=2, color='r', label=r'3 BPCs')
+n2,b2,h2=hist(frac4, bins=bins, density=False, histtype='step', lw=2, color='b', label=r'4 BPCs')
 
 
 lgd=legend(loc='upper center', ncol=2, frameon=False,fontsize=12)
@@ -224,12 +228,12 @@ ylim(0,ymax)
 xlabel(r'$S_{20}^{3,4}$',fontsize=14)
 ax=gca()
 ax.set_yticks([])
-ax.set_title('Data',fontsize=14)
+ax.set_title('Data only eigenmodes',fontsize=14)
 
 # ======================================================
 # add vertical lines to indicate the upper limits of Sn
-vlines(Sn_upper_limit(3,20),ymin=0,ymax=ymax,color='g', linestyle='--',linewidth=2)
-vlines(Sn_upper_limit(4,20),ymin=0,ymax=ymax,color='m', linestyle='--',linewidth=2)
+vlines(Sn_upper_limit(3,20),ymin=0,ymax=ymax,color='r', linestyle='--',linewidth=2)
+vlines(Sn_upper_limit(4,20),ymin=0,ymax=ymax,color='b', linestyle='--',linewidth=2)
 ###################################################
 
 

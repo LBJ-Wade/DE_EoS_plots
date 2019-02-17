@@ -99,7 +99,6 @@ ax = plt.gca()
 # loadtxt reconstruction results (obtained using GetDist)
 # eos_SP = np.loadtxt('eos_SP.txt')
 eos_SP = np.loadtxt('eos_SP_6a.txt')
-# eos_SP = np.loadtxt('eos_SP_5a.txt')
 
 a = np.linspace(1,.4,20)
 z = 1/a-1
