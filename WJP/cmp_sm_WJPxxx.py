@@ -19,15 +19,15 @@ dz=0.005
 
 ax = fig.gca()
 
-#w = loadtxt('analysis_sm_0.02/EoS/eos_'+str(ids[cnt-1])+'.txt')
-##ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[0]],alpha=0.5)
+w = loadtxt('analysis_sm_0.02/EoS/eos_'+str(ids[cnt-1])+'.txt')
+ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[0]],alpha=0.5)
 #ax.fill_between(z,y1=w[:,2],y2=w[:,3],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[0]],alpha=0.5)
 
 #w = loadtxt('EoS_sm_0.02/eos_'+str(ids[cnt-1])+'.txt')
 #ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],label=r'$\sigma_{\bar{w}}=0.02$',color=colors[cid[1]],alpha=0.5)
 
-#w = loadtxt('analysis_sm_0.04/EoS/eos_'+str(ids[cnt-1])+'.txt')
-#ax.errorbar(z-dz,w[:,0],yerr=w[:,1],fmt='d-.',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.04$',color=colors[cid[1]])
+w = loadtxt('analysis_sm_0.04/EoS/eos_'+str(ids[cnt-1])+'.txt')
+ax.errorbar(z-dz,w[:,0],yerr=w[:,1],fmt='d-.',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.04$',color=colors[cid[1]])
 #ax.errorbar(z-dz,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],fmt='d-.',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.04$',color=colors[cid[1]])
 
 #w = loadtxt('EoS_sm_0.04/eos_'+str(ids[cnt-1])+'.txt')
@@ -37,8 +37,8 @@ ax = fig.gca()
 w = loadtxt('analysis_sm_0.08/EoS/eos_'+str(ids[cnt-1])+'.txt')
 ax.errorbar(z+dz,w[:,0],yerr=w[:,1],fmt='v--',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.08$',color=colors[cid[2]])
 
-w = loadtxt('EoS_sm_0.08/eos_'+str(ids[cnt-1])+'.txt')
-ax.errorbar(z+dz,w[:,0],yerr=w[:,1],fmt='v--',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.08$',color=colors[cid[0]])
+#w = loadtxt('EoS_sm_0.08/eos_'+str(ids[cnt-1])+'.txt')
+#ax.errorbar(z+dz,w[:,0],yerr=w[:,1],fmt='v--',ms=5,capsize=3,capthick=3,label=r'$\sigma_{\bar{w}}=0.08$',color=colors[cid[0]])
 
 
 ax.hlines(-1,xmin=0,xmax=1.7,linestyles='dashed',color='k',linewidth=1.5)
@@ -60,6 +60,6 @@ for i in range(len(texts)):
 
 ax.text(0.6,-2.25,'WFIRST + JLA + Planck',fontsize=14,color='k')
 
-fig.savefig('WJP_cmp_sigma_w.pdf')
+#fig.savefig('WJP_cmp_sigma_w.pdf')
 
 show()
