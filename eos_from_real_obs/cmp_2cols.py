@@ -51,9 +51,9 @@ ax = fig.add_subplot(1,2,2)
 # ax.fill_between(z,y1=f[:,2],y2=f[:,3],color=colors[3],lw=0.1,alpha=0.3,label=r'JLA+BAO+H(z)+${\it Planck\,2015}$')
 
 ax.errorbar(z-dz,e[:,0],yerr=[e[:,0]-e[:,2],e[:,3]-e[:,0]],marker='o',markersize=5,capsize=4,capthick=2,
-	color=colors[2],label=r'SNLS3+BAO+H(z)+${\it Planck\,2015}$')
+	color=colors[2],label=r'SNLS3+BAO+H(z)+${\it Planck}$')
 ax.errorbar(z+dz,f[:,0],yerr=[f[:,0]-f[:,2],f[:,3]-f[:,0]],marker='s',markersize=5,capsize=4,capthick=2,
-	color=colors[3],label=r'JLA+BAO+H(z)+${\it Planck\,2015}$')
+	color=colors[3],label=r'JLA+BAO+H(z)+${\it Planck}$')
 
 # ax.set_yticks([])
 

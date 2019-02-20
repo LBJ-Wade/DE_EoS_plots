@@ -62,30 +62,46 @@ plt.subplot(1,2,1)
 ax = plt.gca()
 
 rwidth=0.6
-ax.hist(dmu, bins=nbin_all, label=r'ALL', alpha=0.5, rwidth=rwidth, color=colors[0])
-ax.hist(dmu[ID1], bins=nbin_1, label=r'$z<' + str(z1) + '$', alpha=0.7, rwidth=rwidth, color=colors[1])
-ax.hist(dmu[ID2], bins=nbin_2, label=r'$z\geq' + str(z2) + '$', alpha=0.8, rwidth=rwidth, color=colors[2])
+ax.hist(dmu, bins=nbin_all, label=r'ALL     ' + r' p = '+str(p), alpha=0.5, rwidth=rwidth, color=colors[0])
+ax.hist(dmu[ID1], bins=nbin_1, label=r'$z<' + str(z1) + '$' + r' p = '+str(p1), alpha=0.7, rwidth=rwidth, color=colors[1])
+ax.hist(dmu[ID2], bins=nbin_2, label=r'$z\geq' + str(z2) + '$' + r' p = '+str(p2), alpha=0.8, rwidth=rwidth, color=colors[2])
 
 # add p-vale
-ax.text(0.175,0.5,r'p = '+str(p),
-		color=colors[0],
-        horizontalalignment='center',
-        verticalalignment='center',
-        transform=ax.transAxes,
-        fontsize=14)
+# ax.text(0.15,0.5,r'p = '+str(p),
+# 		color=colors[0],
+#         horizontalalignment='center',
+#         verticalalignment='center',
+#         transform=ax.transAxes,
+#         fontsize=14)
+
+# ax.text(0.15,0.4,r'p = '+str(p1),
+# 		color=colors[1],
+#         horizontalalignment='center',
+#         verticalalignment='center',
+#         transform=ax.transAxes,
+#         fontsize=14)
+
+# ax.text(0.15,0.3,r'p = '+str(p2),
+# 		color=colors[2],
+#         horizontalalignment='center',
+#         verticalalignment='center',
+#         transform=ax.transAxes,
+#         fontsize=14)
 
 ax.set_xlim(-3.5,3.5)
 ax.set_xticks([-3,-2,-1,0,1,2,3])
 ax.set_xticklabels([-3,-2,-1,0,1,2,3],fontsize=14)
 ax.set_xlabel(r'$\widetilde{\Delta\mu}$',fontsize=14)
 
-ax.set_yticks([0,20,40,60,80,100,120,140])
-ax.set_yticklabels([0,20,40,60,80,100,120,140],fontsize=14)
+yticks = [0,50,100,150]
+ax.set_ylim(0,170)
+ax.set_yticks(yticks)
+ax.set_yticklabels(yticks,fontsize=14)
 ax.set_ylabel(r'Counts',fontsize=14)
 
 ax.tick_params(axis='both',direction='in')
 
-lgd=ax.legend(loc='upper left',fontsize=14,frameon=False)
+lgd=ax.legend(loc='upper left',fontsize=13,frameon=False)
 texts = lgd.get_texts()
 for i in range(len(texts)):
 	plt.setp(texts[i],color=colors[i])
