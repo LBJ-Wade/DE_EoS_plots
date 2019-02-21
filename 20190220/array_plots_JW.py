@@ -11,11 +11,11 @@ EoS_dir = 'EoS.JW'
 colors=['g','r']
 alpha=0.8
 
-fig = figure(figsize=(9,6))
+fig = figure(figsize=(13,8))
 
-N_TOT =100
-N1 = 7   # num of rows
-N2 = 6  #  num of cols
+N_TOT =60
+N1 = 8   # num of rows
+N2 = 7  #  num of cols
 
 ids = []
 
@@ -43,6 +43,8 @@ for i in range(N1):
         ax.hlines(-1,xmin=0,xmax=1.5,linestyles='dashed',linewidth=1)
         ax.set_xlim(0-10*dz,1.5+dz*10)
         ax.set_ylim(-3.5,0.5)
+
+        ax.text(0.5,-2.5,'ID = '+str(ids[cnt-1]))
 
         if i == N1-1:
             ax.set_xticks([0,0.5,1.0,1.5])
