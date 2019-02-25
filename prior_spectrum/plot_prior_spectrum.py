@@ -36,7 +36,7 @@ val_p = abs(val_p[idx_p])
 x = np.arange(1,21)
 
 # ax.plot(x,np.log10(val_p),'-.s',ms=4,label=r'Continuity prior ($\sigma_{\bar{w}}=0.04, a_s=0.06$)', color=colors[0], alpha=alpha)
-ax.plot(x,val_p,':s',ms=4,label=r'Continuity prior ($\sigma_{\bar{w}}=0.04, a_s=0.06$)', color=colors[0], alpha=alpha)
+ax.plot(x,val_p,':s',ms=4,label=r'$\sigma_{\bar{w}}=0.04, a_c=0.06$', color=colors[0], alpha=alpha)
 
 xticks=[0,5,10,15,20]
 ax.set_xticks(xticks)

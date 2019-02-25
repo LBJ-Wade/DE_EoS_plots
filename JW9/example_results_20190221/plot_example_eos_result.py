@@ -59,6 +59,8 @@ def read_jla_mock( mock_filename ):
 
 jla = read_jla_mock('MOCK_JLA_40.txt')
 eos_SP = np.loadtxt('eos_40.txt')
+eos_no_prior = np.loadtxt('eos_no_prior.txt')
+eos_no_prior2 = np.loadtxt('eos_no_prior2.txt')
 
 
 z = jla[:,0]
@@ -112,37 +114,75 @@ ax = plt.gca()
 a = np.linspace(1,.4,20)
 z = 1/a-1
 
-colors=['blue','red']
+colors=['blue','red','gray']
 ax.hlines(-1,xmin=0,xmax=1.5,linestyle='dashed',lw=2,alpha=1,color=colors[0],label=r'Fiducal model')
+
+# EoS result with prior enforced
 ax.errorbar(z,eos_SP[:,0],yerr=[eos_SP[:,0]-eos_SP[:,2],eos_SP[:,3]-eos_SP[:,0]],
-			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[1],label=r'Reconstruction')
+			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[1],label=r'Prior enforced')
 
 # ax.errorbar(z,eos_SP[:,0],yerr=eos_SP[:,1],
 # 			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[1],label=r'Reconstruction')
+
+# EoS result without prior
+# ax.errorbar(z,eos_no_prior[:,0],yerr=[eos_no_prior[:,0]-eos_no_prior[:,2],eos_no_prior[:,3]-eos_no_prior[:,0]],
+# 			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[2],label=r'Reconstruction without prior')
+
+# ax.errorbar(z,eos_no_prior[:,0],yerr=eos_no_prior[:,1],
+# 			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[2],label=r'Reconstruction without prior')
+
+ax.plot(z,eos_no_prior[:,0],'--',lw=2.5,color=colors[2])
+ax.fill_between(z,y1=eos_no_prior[:,0]-eos_no_prior[:,1],y2=eos_no_prior[:,0]+eos_no_prior[:,1],
+			color=colors[2],alpha=0.5,label=r'Without prior')
+
+# ax.fill_between(z,y1=eos_no_prior[:,2],y2=eos_no_prior[:,3],
+# 			color=colors[2],label=r'Reconstruction without prior')
+
+# ax.fill_between(z,y1=eos_no_prior2[:,0]-eos_no_prior2[:,1],y2=eos_no_prior2[:,0]+eos_no_prior2[:,1],
+# 			color='g',alpha=0.5,label=r'Reconstruction without prior')
+
+# ax.fill_between(z,y1=eos_no_prior2[:,2],y2=eos_no_prior2[:,3],
+# 			color='g',alpha=0.5,label=r'Reconstruction without prior')
+
 
 ax.set_xlim(-0.025,1.525)
 ax.set_xticks([0,0.25,0.5,0.75,1.0,1.25,1.5])
 ax.set_xticklabels([0,0.25,0.5,0.75,1.0,1.25,1.5],fontsize=14)
 ax.set_xlabel(r'$z$',fontsize=14)
 
-ax.set_yticks([-3,-2.5,-2,-1.5,-1,-0.5])
-ax.set_yticklabels([-3,-2.5,-2,-1.5,-1,0.5],fontsize=14)
+yticks=[-3,-2,-1,-0]
+ax.set_yticks(yticks)
+ax.set_yticklabels(yticks,fontsize=14)
 ax.set_ylabel(r'$w(z)$',fontsize=14)
-lgd=ax.legend(loc='lower left',frameon=False,fontsize=14)
+
+# lgd=ax.legend(loc='lower left',frameon=False,fontsize=14)
 ax.tick_params(axis='both',direction='in')
 
+
+# texts = lgd.get_texts()
+# for i in range(len(texts)):
+# 	plt.setp(texts[i],color=colors[i])
+
+handles,labels = ax.get_legend_handles_labels()
+handles = [handles[0], handles[2], handles[1]]
+labels = [labels[0], labels[2], labels[1]]
+
+lgd=ax.legend(handles,labels,loc='lower left',frameon=False,fontsize=14)
+# lgd=legend(loc='upper left',frameon=False,fontsize=12)
 texts = lgd.get_texts()
+cid = [0,2,1]
 for i in range(len(texts)):
-	plt.setp(texts[i],color=colors[i])
+	plt.setp(texts[i],fontsize=14,color=colors[i])
+
 
 # add reduced chisq
 dof = 719
 chisq_red = 876.39/dof
-ax.text(0.05,-2,r'$\chi^2_{\rm reduced} = '+str(round(chisq_red,2))+'$',fontsize=14)
+ax.text(0.05,-2,r'$\chi^2_{\rm reduced} = '+str(round(chisq_red,2))+'$',fontsize=14,color='r')
 
 ###########################################################
 # final adjustments ...
-plt.subplots_adjust(wspace=0.2,
+plt.subplots_adjust(wspace=0.15,
                     hspace=0.25,
                     left=0.065,
                     right=0.985,

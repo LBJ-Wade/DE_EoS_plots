@@ -17,18 +17,20 @@ def extract_bestfit_w(likestats_file):
 
 prior_inv_covmat = 'CPZ_prior_smoothed_ac_0.06_sigma_mw_0.04_inv.txt'
 
-SN_dir = 'mock_JLA_20190204'
+SN_dir = 'mock_JLA_20190220'
 
 # EoS_dir = 'EoS.old'
-EoS_dir = 'EoS.ref_20190212'
+EoS_dir = 'EoS.ref_20190220'
 
 # Result_dir = 'results.old'
-Result_dir = 'results.ref_20190212'
+Result_dir = 'results.ref_20190220'
 
 SIZE=1000
 
+# 740 SNe
+# CMB distance prior parameter, 3 
 # 20 {wi}, H0, omegac, omegab, MB
-dof = (740+1-20-4)
+dof = (740+3-20-4)
 
 p_value = None
 tot_chi2 = None
@@ -130,8 +132,11 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.45)
-axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.45)
+# axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.45)
+# axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.45)
+
+axScatter.scatter(p_value[nbad<1],data_chi2[nbad<1]/dof,marker='o',s=13,color='r',alpha=0.55)
+axScatter.scatter(p_value[nbad>=1],data_chi2[nbad>=1]/dof,marker='d',s=13,color='b',alpha=0.55)
 
 # xticks=[0,0.2,0.4,0.6,0.8,1.0]
 # yticks=[1.1,1.2,1.3,1.4]
@@ -140,12 +145,12 @@ axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b
 # axScatter.set_xticklabels(xticks,fontsize=14)
 # axScatter.set_yticklabels(yticks,fontsize=14)
 
-bins=30
+bins=40
 axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
-axHistx.hist(p_value[nbad>1],bins=bins,rwidth=0.8,color='b',alpha=0.65)
+axHistx.hist(p_value[nbad>1],bins=bins,rwidth=0.8,color='b',alpha=0.85)
 
 n,b,p=axHisty.hist(data_chi2/dof,bins=bins,rwidth=0.8,color='r',alpha=0.55,orientation='horizontal')
-axHisty.hist(data_chi2[nbad>1]/dof,bins=b,rwidth=0.8,color='b',alpha=0.65,orientation='horizontal')
+axHisty.hist(data_chi2[nbad>1]/dof,bins=b,rwidth=0.8,color='b',alpha=0.85,orientation='horizontal')
 
 axHistx.set_xlim(axHistx.get_xlim())
 axHistx.set_ylim(axHistx.get_ylim())
