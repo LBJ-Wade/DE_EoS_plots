@@ -9,7 +9,7 @@ z = 1/a-1
 EoS_dir = 'EoS_ref'
 EoS_dir_inv_err = 'EoS_inv_err'
 
-colors=['g','r']
+colors=['r','b']
 alpha=0.8
 
 fig = figure(figsize=(9,6))
@@ -34,6 +34,7 @@ cnt = 1
 for i in range(N1):
     for j in range(N2):
         ax = fig.add_subplot(N1,N2,cnt)
+        ax.tick_params(axis='both',direction='in')
 
         w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
         ax.errorbar(z-dz,w[:,0],yerr=w[:,1],capsize=2,color=colors[0],alpha=alpha)

@@ -6,7 +6,7 @@ amin=1/(1+zmax)
 a = linspace(1,amin,20)
 z = 1/a-1
 
-colors=['b','r']
+colors=['b','g']
 
 fig = figure(figsize=(9,9))
 
@@ -30,6 +30,7 @@ cnt = 1
 for i in range(N1):
     for j in range(N2):
         ax = fig.add_subplot(N1,N2,cnt)
+        ax.tick_params(axis='both',direction='in')
 
         w = loadtxt('EoS_ref/eos_'+str(ids[cnt-1])+'.txt')
         ax.errorbar(z-dz,w[:,0],yerr=w[:,1],capsize=2,color=colors[0],alpha=0.65)

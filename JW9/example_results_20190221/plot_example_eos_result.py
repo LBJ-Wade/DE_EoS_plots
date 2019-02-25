@@ -83,8 +83,8 @@ ax = plt.gca()
 
 rwidth=0.6
 ax.hist(dmu, bins=nbin_all, label=r'ALL     ' + r' p = '+str(p), alpha=0.5, rwidth=rwidth, color=colors[0])
-ax.hist(dmu[ID1], bins=nbin_1, label=r'$z<' + str(z1) + '$' + r' p = '+str(p1), alpha=0.7, rwidth=rwidth, color=colors[1])
-ax.hist(dmu[ID2], bins=nbin_2, label=r'$z\geq' + str(z2) + '$' + r' p = '+str(p2), alpha=0.8, rwidth=rwidth, color=colors[2])
+ax.hist(dmu[ID1], bins=nbin_1, label=r'$z<' + str(z1) + '$' + r' p = '+str(p1)+'0', alpha=0.7, rwidth=rwidth, color=colors[1])
+ax.hist(dmu[ID2], bins=nbin_2, label=r'$z>' + str(z2) + '$' + r' p = '+str(p2), alpha=0.8, rwidth=rwidth, color=colors[2])
 
 
 ax.set_xlim(-3.5,3.5)
