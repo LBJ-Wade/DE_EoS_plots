@@ -132,25 +132,24 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-# axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.45)
-# axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='x',s=20,color='b',alpha=0.45)
-
-axScatter.scatter(p_value[nbad<1],data_chi2[nbad<1]/dof,marker='o',s=13,color='r',alpha=0.55)
-axScatter.scatter(p_value[nbad>=1],data_chi2[nbad>=1]/dof,marker='+',s=25,color='b',alpha=0.55)
+# axScatter.scatter(p_value,data_chi2/dof,marker='o',s=13,color='r',alpha=0.35)
+axScatter.scatter(p_value[nbad<=1],data_chi2[nbad<=1]/dof,marker='o',s=13,color='r',alpha=0.65)
+axScatter.scatter(p_value[nbad>1],data_chi2[nbad>1]/dof,marker='+',s=35,color='b',alpha=0.85)
 axScatter.set_xlabel(r'$p$',fontsize=14)
 axScatter.set_ylabel(r'$\chi^2_{\rm reduced} \,\,\,(dof = '+str(dof)+')$',fontsize=14)
 axScatter.tick_params(axis='both',direction='in')
 
 bins=40
-axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
-axHistx.hist(p_value[nbad>1],bins=bins,rwidth=0.8,color='b',alpha=0.85)
+# axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
+axHistx.hist(p_value[nbad<=1],bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65)
+axHistx.hist(p_value[nbad>1],bins=bins,histtype='step',linewidth=2,color='b',alpha=0.85)
 axHistx.set_xlim(axHistx.get_xlim())
 axHistx.set_ylim(axHistx.get_ylim())
 axHistx.set_yticks([])
 axHistx.tick_params(axis='x',direction='in')
 
-n,b,p=axHisty.hist(data_chi2/dof,bins=bins,rwidth=0.8,color='r',alpha=0.55,orientation='horizontal')
-axHisty.hist(data_chi2[nbad>1]/dof,bins=b,rwidth=0.8,color='b',alpha=0.85,orientation='horizontal')
+n,b,p=axHisty.hist(data_chi2[nbad<=1]/dof,bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65,orientation='horizontal')
+axHisty.hist(data_chi2[nbad>1]/dof,bins=b,histtype='step',linewidth=2,color='b',alpha=0.85,orientation='horizontal')
 axHisty.set_xticks([])
 axHisty.tick_params(axis='y',direction='in')
 

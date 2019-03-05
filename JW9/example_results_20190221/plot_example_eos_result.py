@@ -132,11 +132,11 @@ ax.errorbar(z,eos_SP[:,0],yerr=[eos_SP[:,0]-eos_SP[:,2],eos_SP[:,3]-eos_SP[:,0]]
 # 			marker='o',elinewidth=1.5,markersize=4,capsize=3,capthick=2,color=colors[2],label=r'Reconstruction without prior')
 
 ax.plot(z,eos_no_prior[:,0],'--',lw=2.5,color=colors[2])
-ax.fill_between(z,y1=eos_no_prior[:,0]-eos_no_prior[:,1],y2=eos_no_prior[:,0]+eos_no_prior[:,1],
-			color=colors[2],alpha=0.5,label=r'Without prior')
+# ax.fill_between(z,y1=eos_no_prior[:,0]-eos_no_prior[:,1],y2=eos_no_prior[:,0]+eos_no_prior[:,1],
+# 			color=colors[2],alpha=0.5,label=r'Without prior')
 
-# ax.fill_between(z,y1=eos_no_prior[:,2],y2=eos_no_prior[:,3],
-# 			color=colors[2],label=r'Reconstruction without prior')
+ax.fill_between(z,y1=eos_no_prior[:,2],y2=eos_no_prior[:,3],
+			color=colors[2],label=r'Reconstruction without prior')
 
 # ax.fill_between(z,y1=eos_no_prior2[:,0]-eos_no_prior2[:,1],y2=eos_no_prior2[:,0]+eos_no_prior2[:,1],
 # 			color='g',alpha=0.5,label=r'Reconstruction without prior')
