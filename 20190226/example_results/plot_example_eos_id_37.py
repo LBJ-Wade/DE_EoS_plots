@@ -1,19 +1,13 @@
 from pylab import *
 
-w = loadtxt('post/EoS/eos_54.txt')
-wb = loadtxt('eos_best_fit_id_54.txt')
-# p_all= '0.679059'
-# p_sn = '0.812967'
-p_all= '0.68'
-p_sn = '0.81'
-chisq_lcdm = 799.052080
-chisq_wzCDM= 792.321
-chisq_prior= 5.98999
+w = loadtxt('post/EoS/eos_37.txt')
+wx = loadtxt('post_no_extra_w/EoS/eos_37.txt')
 
-# w = loadtxt('eos_37.txt')
-# p = 0.83
-# chisq_lcdm = 832.693329
-# chisq_wzCDM= 831.013
+p_all= '0.55'
+p_sn = '0.72'
+chisq_lcdm = 832.693329
+chisq_wzCDM= 831.013
+chisq_prior= 8.27532
 
 zmax = 2.5
 a = linspace(1,1/(1+zmax),30)
@@ -27,7 +21,8 @@ ax.fill_between(z,y1=w[:,2],y2=w[:,3],color='r',alpha=0.3,label=r'Reconstructed 
 ax.plot(z,w[:,2],ls='-',color='r',lw=2,alpha=0.75)
 ax.plot(z,w[:,3],ls='-',color='r',lw=2,alpha=0.75)
 ax.plot(z,w[:,0],ls='-',color='r',lw=3,)
-# ax.plot(z,wb,'-s',color='r',lw=1,)
+
+ax.fill_between(z,y1=wx[:,2],y2=wx[:,3],color='g',alpha=0.3,label=r'Reconstructed $w(z)$')
 
 ax.hlines(-1,xmin=0,xmax=zmax,linestyles='--',colors='b',lw=2,label=r'Fiducial $w=-1$')
 
@@ -41,9 +36,6 @@ lgd=ax.legend(loc='upper right',frameon=False,fontsize=13)
 texts = lgd.get_texts()
 setp(texts[0],fontsize=14,color='r')
 setp(texts[1],fontsize=14,color='b')
-
-# text(1.5,-1.25,r'$\chi^2_{\rm LCDM} = ' + str(round(chisq_lcdm,3)) + '$',fontsize=14)
-# text(1.5,-1.45,r'$\chi^2_{\rm w(z)CDM} = ' + str(round(chisq_wzCDM,3)) + '$',fontsize=14)
 
 dx = -1.15
 dy = -0.15
@@ -72,12 +64,7 @@ ax.tick_params(axis='both',direction='in')
 
 fig.subplots_adjust(top=0.995,bottom=0.1,left=0.125,right=0.975)
 
-fig.savefig('example_w_result_id_54.pdf')
-
-# plot BAO and SN fitting
-
-# ax = fig.add_subplot()
-
+fig.savefig('example_w_result_id_9_inv_err.pdf')
 
 
 show()

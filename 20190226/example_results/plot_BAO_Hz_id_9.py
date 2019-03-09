@@ -20,14 +20,14 @@ def read_JLA_mock( mock_filename ):
 
 # Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_Hz.txt')
 Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/fiducial/classmc_test_20190220_Hz.txt')
-Hz_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_36_Hz.txt')
+Hz_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_9x_Hz.txt')
 Hz_lcdm = interp1d(Hz_best_fit_lcdm[:,0],Hz_best_fit_lcdm[:,1])
 Hz_wzcdm = interp1d(Hz_best_fit_wzcdm[:,0],Hz_best_fit_wzcdm[:,1])
 
 
 # bao_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_BAO.txt')
 bao_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/fiducial/classmc_test_20190220_BAO.txt')
-bao_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_36_BAO.txt')
+bao_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_9x_BAO.txt')
 DA_lcdm = interp1d(bao_best_fit_lcdm[:,0],bao_best_fit_lcdm[:,6])
 DA_wzcdm = interp1d(bao_best_fit_wzcdm[:,0],bao_best_fit_wzcdm[:,6])
 
@@ -46,15 +46,15 @@ rd_fid       = 150.7053756
 rd_fid_lcdm  = 150.617
 rd_fid_wzcdm = 150.586
 
-idx='36'
+idx='9'
 
-bao_dr12 = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_'+idx+'.dat')
-# bao_dr12 = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_inv_err_'+idx+'.dat')
-DA_lya = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_z2.34/LyAlpha_54.dat')
+# bao_dr12 = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_'+idx+'.dat')
+bao_dr12 = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_inv_err_'+idx+'.dat')
+DA_lya = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_z2.34/LyAlpha_inv_err_9.dat')
 
 # MB = -1.9271020E+01
 MB = -19.3
-sn_data = read_JLA_mock('/Users/xyh/GitHub/ClassMC-dev/mock_samples/mock_JLA_20190227_full_cov/MOCK_JLA_'+idx+'.txt')
+sn_data = read_JLA_mock('/Users/xyh/GitHub/ClassMC-dev/mock_samples/mock_JLA_20190227_full_cov/MOCK_JLA_inv_err_'+idx+'.txt')
 sn_z = sn_data[:,0]
 sn_mu = sn_data[:,1] + (MB+19.3)
 sn_DL = 10**(sn_mu/5)*1e-5
@@ -93,7 +93,7 @@ bao_dr12_Hz_err = loadtxt('BAO_DA_rs_std.txt')
 bao_dr12_Hz_err /= rd_fid_lcdm
 
 
-Hz_data = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/mock_Hz_20190226/Hz_36.dat')
+Hz_data = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/mock_Hz_20190226/Hz_inv_err_9.dat')
 Hz_z = Hz_data[:,0]
 idx = Hz_z < 2.34
 idx0 = Hz_z>=2.34
@@ -113,7 +113,6 @@ ax.set_xticks(xticks)
 ax.set_xticklabels(xticks,fontsize=13)
 ax.set_xlabel(r'$Z$')
 ax.set_ylim(0.74,1.26)
-ax.set_ylim(0.45,1.55)
 yticks = [0.8,0.9,1.0,1.1,1.2]
 ax.set_yticks(yticks)
 ax.set_yticklabels(yticks,fontsize=13)
@@ -124,6 +123,6 @@ ax.tick_params(axis='both',direction='in')
 
 fig.subplots_adjust(top=0.995,left=0.125,right=0.975,bottom=0.1,hspace=0)
 
-fig.savefig('example_fit_BAO_Hz_id_36.pdf')
+fig.savefig('example_fit_BAO_Hz_id_9_inv_err.pdf')
 
 show()

@@ -7,11 +7,6 @@ chisq_lcdm = 806.143988
 chisq_wzCDM= 801.835
 chisq_prior= 7.21573
 
-# w = loadtxt('eos_37.txt')
-# p = 0.83
-# chisq_lcdm = 832.693329
-# chisq_wzCDM= 831.013
-
 zmax = 2.5
 a = linspace(1,1/(1+zmax),30)
 z = 1/a-1
@@ -63,7 +58,7 @@ ax.set_yticklabels(yticks,fontsize=13)
 
 fig.subplots_adjust(top=0.995,bottom=0.1,left=0.125,right=0.975)
 
-fig.savefig('example_w_result.pdf')
+fig.savefig('example_w_result_id_36.pdf')
 
 # plot BAO and SN fitting
 

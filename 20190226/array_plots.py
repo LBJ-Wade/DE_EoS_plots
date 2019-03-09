@@ -1,4 +1,4 @@
-import sys
+import os,sys
 from pylab import *
 
 zmax=2.5
@@ -8,14 +8,15 @@ z = 1/a-1
 
 colors=['b','g']
 
-EoS_dir = 'EoS_JLA_full_cov'
+EoS_dir = 'example_results/post/EoS'
+EoS_dir2 = 'example_results/post_no_extra_w/EoS'
 # EoS_dir = 'EoS_no_cov'
 
-fig = figure(figsize=(12,8))
+fig = figure(figsize=(14,8))
 
-N_TOT = 50
-N1 = 7   # num of rows
-N2 = 7  #  num of cols
+N_TOT = 100
+N1 = 9   # num of rows
+N2 = 9  #  num of cols
 
 ids = []
 
@@ -35,21 +36,20 @@ for i in range(N1):
         ax = fig.add_subplot(N1,N2,cnt)
         ax.tick_params(axis='both',direction='in')
 
-        # w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-        w = loadtxt(EoS_dir+'/eos_'+str(cnt)+'.txt')
-        # ax.errorbar(z,w[:,0],yerr=w[:,1],capsize=2,color=colors[0],alpha=0.65)
-        ax.errorbar(z,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],capsize=2,color=colors[0],alpha=0.85)
-        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color='r',alpha=0.25)
-        # ax.errorbar(z,-2-w[:,0],yerr=w[:,1],capsize=2,color=colors[0],alpha=0.65)
+        # w = loadtxt(EoS_dir+'/eos_'+str(cnt)+'.txt')
+        # ax.errorbar(z,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],capsize=2,color=colors[0],alpha=0.85)
+        # ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25)
 
-        # w = loadtxt('EoS_err_inv2/eos_'+str(ids[cnt-1])+'.txt')
-        # ax.errorbar(z+dz,w[:,0],yerr=w[:,1],capsize=2,color=colors[1],alpha=0.65)
+        w = loadtxt(EoS_dir2+'/eos_'+str(ids[cnt-1])+'.txt')
+        ax.errorbar(z,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],capsize=2,color=colors[1],alpha=0.85,label='no extra w')
+        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25)
 
         ax.hlines(-1,xmin=0,xmax=zmax,linestyles='dashed',linewidth=1)
         ax.set_ylim(-2.5,0.5)
+        ax.legend(loc='upper left',frameon=False)
 
         # ax.text(0.1,-2,'ID: '+str(ids[cnt-1]))
-        ax.text(0.1,-2,'ID: '+str(cnt))
+        ax.text(0.1,-2,'ID: '+str(ids[cnt-1]))
 
         if i == N1-1:
             xticks = [0,0.5,1.0,1.5,2,2.5]
@@ -75,7 +75,8 @@ for i in range(N1):
 
         cnt += 1
 
-fig.subplots_adjust(wspace=0,hspace=0,bottom=0.1,top=0.995,left=0.05,right=0.995)
+# fig.subplots_adjust(wspace=0,hspace=0,bottom=0.1,top=0.995,left=0.05,right=0.995)
+fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
 # fig.savefig('EoS_list.pdf')
 

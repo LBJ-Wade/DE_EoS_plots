@@ -14,8 +14,8 @@ EoS_inv_dir = 'post_inv_err/EoS'
 fig = figure(figsize=(12,7))
 
 N_TOT = 100
-N1 = 7   # num of rows
-N2 = 5  #  num of cols
+N1 = 10   # num of rows
+N2 = 9  #  num of cols
 
 ids = []
 
