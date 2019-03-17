@@ -11,6 +11,9 @@ colors=['r','g']
 EoS_dir = 'post/EoS'
 EoS_inv_dir = 'post_inv_err/EoS'
 
+EoS_no_err_dir = 'post_no_err_sm_0.04/EoS'
+EoS_no_err_dir2 = 'post_no_err_sm_0.1/EoS'
+
 fig = figure(figsize=(10,6))
 
 N1 = 3   # num of rows
@@ -28,19 +31,26 @@ for i in range(N1):
         ax = fig.add_subplot(N1,N2,cnt)
         ax.tick_params(axis='both',direction='in')
 
-        w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-        # ax.errorbar(z,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],capsize=2,color=colors[0],alpha=0.85)
-        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25)
-        ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
-        ax.plot(z,w[:,2],color=colors[0],ls='-',alpha=0.75)
-        ax.plot(z,w[:,3],color=colors[0],ls='-',alpha=0.75)
+        if cnt < 9:
+            w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
+            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25)
+            ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
+            ax.plot(z,w[:,2],color=colors[0],ls='-',alpha=0.75)
+            ax.plot(z,w[:,3],color=colors[0],ls='-',alpha=0.75)
 
-        w = loadtxt(EoS_inv_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-        # ax.errorbar(z+dz,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],capsize=2,color=colors[1],alpha=0.65)
-        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25)
-        ax.plot(z,w[:,0],color=colors[1],ls='--',alpha=0.75)
-        ax.plot(z,w[:,2],color=colors[1],ls='--',alpha=0.75)
-        ax.plot(z,w[:,3],color=colors[1],ls='--',alpha=0.75)
+            w = loadtxt(EoS_inv_dir+'/eos_'+str(ids[cnt-1])+'.txt')
+            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25)
+            ax.plot(z,w[:,0],color=colors[1],ls='--',alpha=0.75)
+            ax.plot(z,w[:,2],color=colors[1],ls='--',alpha=0.75)
+            ax.plot(z,w[:,3],color=colors[1],ls='--',alpha=0.75)
+        else:
+            w = loadtxt(EoS_no_err_dir+'/eos_1.txt')
+            w_peak = loadtxt(EoS_no_err_dir+'/EoS_1_w_peak_vals.txt')
+            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25,label=r'no error, $\sigma_{\bar w}=0.04$')
+            # ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
+            ax.plot(z,w_peak,color=colors[0],ls='-.',lw=2,alpha=0.75)
+            ax.plot(z,w[:,2],color=colors[0],ls='-',lw=2,alpha=0.75)
+            ax.plot(z,w[:,3],color=colors[0],ls='-',lw=2,alpha=0.75)
 
         ax.hlines(-1,xmin=0,xmax=zmax,linestyles='dashed',linewidth=1)
         ax.set_ylim(-2.15,0.15)
@@ -63,14 +73,6 @@ for i in range(N1):
             # ax.set_yticklabels([-3,-2,-1,0],fontsize=8)
             ax.set_ylabel(r'$w(z)$')
         
-        # if cnt == 1:
-        #     # lgd=ax.legend(loc='lower left',frameon=False)
-        #     # texts = lgd.get_texts()
-        #     # for k in range(len(texts)):
-        #     #     plt.setp(texts[k],fontsize=8,color=colors[k])
-        #     ax.text(0.025,-2.75,'Original result',color=colors[0])
-        #     ax.text(0.025,-3.25,'Error inverted',color=colors[1])
-
         cnt += 1
 
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.995,left=0.065,right=0.995)

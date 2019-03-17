@@ -20,7 +20,7 @@ def read_JLA_mock( mock_filename ):
 
 
 
-idx='80'
+idx='144'
 
 # Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_Hz.txt')
 Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/fiducial/classmc_test_20190220_Hz.txt')

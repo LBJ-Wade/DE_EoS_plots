@@ -59,6 +59,6 @@ plt.setp(texts[1],fontsize=14,color=colors[1])
 
 fig.subplots_adjust(top=0.995,bottom=0.125,left=0.125,right=0.975)
 
-savefig('w_results_2012.pdf')
+# savefig('w_results_2012.pdf')
 
 show()

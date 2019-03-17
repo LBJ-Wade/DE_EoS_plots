@@ -2,6 +2,7 @@ from pylab import *
 
 # w = loadtxt('post/EoS/eos_34.txt')
 w = loadtxt('post_no_extra_w/EoS/eos_80.txt')
+w_bestfit = loadtxt('post_no_extra_w/EoS/EoS_80_w_peak_vals.txt')
 
 p_all= '0.58'
 p_sn = '0.59'
@@ -20,7 +21,8 @@ ax = fig.add_subplot(1,1,1)
 ax.fill_between(z,y1=w[:,2],y2=w[:,3],color='r',alpha=0.3,label=r'Reconstructed $w(z)$')
 ax.plot(z,w[:,2],ls='-',color='r',lw=2,alpha=0.75)
 ax.plot(z,w[:,3],ls='-',color='r',lw=2,alpha=0.75)
-ax.plot(z,w[:,0],ls='-',color='r',lw=3,)
+# ax.plot(z,w[:,0],ls='-',color='r',lw=3)
+ax.plot(z,w_bestfit,'-o',color='r',lw=3)
 
 # ax.fill_between(z,y1=wx[:,2],y2=wx[:,3],color='g',alpha=0.3,label=r'Reconstructed $w(z)$')
 

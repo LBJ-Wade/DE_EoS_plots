@@ -9,8 +9,11 @@ zmax=2.5
 a = linspace(1,1/(1+zmax),30)
 z = 1/a-1
 
-w = loadtxt('eos_PLK15_JLA_DR12BAO_Hz_HST.txt')
+# w = loadtxt('eos_PLK15_JLA_DR12BAO_Hz_HST.txt')
+# w = loadtxt('eos_yy.txt')
+w = loadtxt('eos_8-9.txt')
 wd = loadtxt('eos_13_14.txt')
+# wd = loadtxt('eos_8-9.txt')
 
 
 fig = figure(figsize=(6,4))
@@ -21,12 +24,18 @@ ax = fig.add_subplot(1,1,1)
 # 	marker='o',markersize=5,capsize=4,capthick=2,color=colors[0],
 # 	label=r'JLA+BAO-Z16+H(z)+{\it Planck 2015} distance prior}')
 
-ax.errorbar(z,wd[:,0],yerr=[wd[:,0]-wd[:,2],wd[:,3]-wd[:,0]],
+# ax.errorbar(z,wd[:,0],yerr=[wd[:,0]-wd[:,2],wd[:,3]-wd[:,0]],
+# 	marker='o',markersize=5,capsize=4,capthick=2,color=colors[1],
+# 	label=r'D16-DP')
+
+ax.errorbar(z,wd[:,0],yerr=wd[:,1],
 	marker='o',markersize=5,capsize=4,capthick=2,color=colors[1],
 	label=r'D16-DP')
 
+# ax.fill_between(z,y1=wd[:,0]-wd[:,1],y2=wd[:,0]+wd[:,1],color=colors[1],label=r'D16-DP',alpha=0.3)
 
 ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],label=r'D16',alpha=0.3)
+# ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],color=colors[0],label=r'D16',alpha=0.3)
 ax.plot(z,w[:,0],ls='-',lw=2,color=colors[0],alpha=0.75)
 ax.plot(z,w[:,2],ls='-',lw=1,color=colors[0],alpha=0.75)
 ax.plot(z,w[:,3],ls='-',lw=1,color=colors[0],alpha=0.75)
