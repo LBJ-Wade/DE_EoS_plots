@@ -2,8 +2,9 @@ from pylab import *
 
 n_cross = loadtxt('cross_times.txt')
 
-idx_good = n_cross <= 0
-idx_bad = n_cross >= 1
+idx_good = n_cross[:,0] <= 0
+idx_bad1 = n_cross[:,0] >= 1
+idx_bad2 = n_cross[:,1] >= 1
 
 p = loadtxt('p_all.txt')
 
@@ -40,9 +41,11 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-# axScatter.scatter(p_all[idx_good],chi2_data[idx_good],marker='o',s=13,color='r',alpha=0.65,label='No deviation from $w=-1$')
-axScatter.scatter(p_all,chi2_data,marker='o',s=13,color='r',alpha=0.65)
-axScatter.scatter(p_all[idx_bad],chi2_data[idx_bad],marker='+',s=35,color='b',alpha=0.85,label='Has deviation from $w=-1$')
+axScatter.scatter(p_all[idx_good],chi2_data[idx_good],marker='o',s=15,color='gray',alpha=1,label='deviation from $w=-1$ less than $1\sigma$ ')
+# axScatter.scatter(p_all,chi2_data,marker='o',s=20,color='gray',alpha=0.25)
+axScatter.scatter(p_all[idx_bad1],chi2_data[idx_bad1],marker='+',s=35,color='b',label=r'deviation from $w=-1$ by $\gtrsim 1\sigma$ ',alpha=0.75)
+axScatter.scatter(p_all[idx_bad2],chi2_data[idx_bad2],marker='o',s=20,color='r',label=r'deviation from $w=-1$ by $\gtrsim 2\sigma$ ',alpha=0.75)
+axScatter.scatter(p_all[79],chi2_data[79],marker='*',s=100,color='lime')
 axScatter.set_xlabel(r'$p$',fontsize=14)
 axScatter.set_ylabel(r'$\chi^2_{\rm data}$',fontsize=14)
 axScatter.set_ylim(675,975)
@@ -50,22 +53,34 @@ axScatter.tick_params(axis='both',direction='in')
 
 lgd=axScatter.legend(loc='upper left',frameon=False)
 texts = lgd.get_texts()
-setp(texts[0],fontsize=12,color='b')
-# setp(texts[1],fontsize=12,color='b')
+setp(texts[0],fontsize=11,color='gray')
+setp(texts[1],fontsize=11,color='b')
+setp(texts[2],fontsize=11,color='r')
 
-bins=15
+bins=30
 # axHistx.hist(p_value,bins=bins,rwidth=0.8,color='r',alpha=0.55)
 # axHistx.hist(p_all[idx_good],bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65)
-axHistx.hist(p_all,bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65)
-axHistx.hist(p_all[idx_bad],bins=bins,histtype='step',linewidth=2,color='b',alpha=0.85)
+
+p_stack = []
+p_stack.append(p_all[idx_good])
+p_stack.append(p_all[idx_bad1])
+p_stack.append(p_all[idx_bad2])
+
+alpha=0.65
+
+axHistx.hist(p_stack,bins=bins,histtype='bar',linewidth=2,color=['gray','b','r'],stacked=True,alpha=alpha)
+
 axHistx.set_xlim(axHistx.get_xlim())
 axHistx.set_ylim(axHistx.get_ylim())
 axHistx.set_yticks([])
 axHistx.tick_params(axis='x',direction='in')
 
-# n,b,p=axHisty.hist(chi2_data[idx_good],bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65,orientation='horizontal')
-n,b,p=axHisty.hist(chi2_data,bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65,orientation='horizontal')
-axHisty.hist(chi2_data[idx_bad],bins=b,histtype='step',linewidth=2,color='b',alpha=0.85,orientation='horizontal')
+chi2_data_stack = []
+chi2_data_stack.append(chi2_data[idx_good])
+chi2_data_stack.append(chi2_data[idx_bad1])
+chi2_data_stack.append(chi2_data[idx_bad2])
+
+axHisty.hist(chi2_data_stack,bins=bins,histtype='bar',linewidth=2,color=['gray','b','r'],orientation='horizontal',stacked=True,alpha=alpha)
 axHisty.set_xticks([])
 axHisty.set_ylim(675,975)
 axHisty.tick_params(axis='y',direction='in')

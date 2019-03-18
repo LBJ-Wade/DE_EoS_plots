@@ -6,7 +6,7 @@ amin=1/(1+zmax)
 a = linspace(1,amin,30)
 z = 1/a-1
 
-colors=['r','g']
+colors=['r','g','b']
 
 EoS_dir = 'post/EoS'
 EoS_inv_dir = 'post_inv_err/EoS'
@@ -19,9 +19,19 @@ fig = figure(figsize=(10,6))
 N1 = 3   # num of rows
 N2 = 3  #  num of cols
 
-ids = [9,12,14,28,54,78,89,90,36]
+# ids = [9,12,14,28,54,78,89,90,36]
 
+ids = []
+
+N_TOT = 100
 I = 0
+while I < N1*N2-1:
+    tmp = randint(1,N_TOT+1)
+    if ids.count(tmp) == 0:
+        ids.append(tmp)
+        I += 1
+
+ids.append(36)
 
 dz = 0.005
 
@@ -46,16 +56,17 @@ for i in range(N1):
         else:
             w = loadtxt(EoS_no_err_dir+'/eos_1.txt')
             w_peak = loadtxt(EoS_no_err_dir+'/EoS_1_w_peak_vals.txt')
-            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25,label=r'no error, $\sigma_{\bar w}=0.04$')
+            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[2],alpha=0.25,label=r'Ideal mock dataset: $\Delta d=0$')
             # ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
-            ax.plot(z,w_peak,color=colors[0],ls='-.',lw=2,alpha=0.75)
-            ax.plot(z,w[:,2],color=colors[0],ls='-',lw=2,alpha=0.75)
-            ax.plot(z,w[:,3],color=colors[0],ls='-',lw=2,alpha=0.75)
+            ax.plot(z,w_peak,color=colors[2],ls='-.',lw=2,alpha=0.75)
+            ax.plot(z,w[:,2],color=colors[2],ls='-',lw=2,alpha=0.75)
+            ax.plot(z,w[:,3],color=colors[2],ls='-',lw=2,alpha=0.75)
+            ax.legend(loc='upper left')
 
         ax.hlines(-1,xmin=0,xmax=zmax,linestyles='dashed',linewidth=1)
         ax.set_ylim(-2.15,0.15)
 
-        ax.text(0.1,-2,'ID: '+str(ids[cnt-1]))
+        # ax.text(0.1,-2,'ID: '+str(ids[cnt-1]))
         # ax.text(0.1,-2,'ID: '+str(cnt))
 
         ax.set_xlim(0,2.5)
@@ -78,6 +89,6 @@ for i in range(N1):
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.995,left=0.065,right=0.995)
 # fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
-fig.savefig('examples_3x3.pdf')
+fig.savefig('examples_3x3_updated.pdf')
 
 show()

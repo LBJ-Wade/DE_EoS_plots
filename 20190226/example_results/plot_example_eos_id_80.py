@@ -7,8 +7,10 @@ w_bestfit = loadtxt('post_no_extra_w/EoS/EoS_80_w_peak_vals.txt')
 p_all= '0.58'
 p_sn = '0.59'
 chisq_lcdm = 841.232853
-chisq_wzCDM= 834.04
-chisq_prior= 8.47255
+# chisq_wzCDM= 834.04
+# chisq_prior= 8.47255
+chisq_wzCDM = 834.803
+chisq_prior = 6.98254
 
 zmax = 2.5
 a = linspace(1,1/(1+zmax),30)
@@ -66,7 +68,7 @@ ax.tick_params(axis='both',direction='in')
 
 fig.subplots_adjust(top=0.995,bottom=0.1,left=0.125,right=0.975)
 
-fig.savefig('example_w_result_id_80.pdf')
+# fig.savefig('example_w_result_id_80.pdf')
 
 
 show()
