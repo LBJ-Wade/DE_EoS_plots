@@ -23,8 +23,8 @@ ax = fig.add_subplot(1,1,1)
 ax.fill_between(z,y1=w[:,2],y2=w[:,3],color='r',alpha=0.3,label=r'Reconstructed $w(z)$')
 ax.plot(z,w[:,2],ls='-',color='r',lw=2,alpha=0.75)
 ax.plot(z,w[:,3],ls='-',color='r',lw=2,alpha=0.75)
-# ax.plot(z,w[:,0],ls='-',color='r',lw=3)
-ax.plot(z,w_bestfit,'-o',color='r',lw=3)
+ax.plot(z,w[:,0],ls='-',color='r',lw=3)
+# ax.plot(z,w_bestfit,'-o',color='r',lw=3)
 
 # ax.fill_between(z,y1=wx[:,2],y2=wx[:,3],color='g',alpha=0.3,label=r'Reconstructed $w(z)$')
 
@@ -68,7 +68,7 @@ ax.tick_params(axis='both',direction='in')
 
 fig.subplots_adjust(top=0.995,bottom=0.1,left=0.125,right=0.975)
 
-# fig.savefig('example_w_result_id_80.pdf')
+fig.savefig('example_w_result_id_80.pdf')
 
 
 show()
