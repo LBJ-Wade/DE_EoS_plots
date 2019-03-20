@@ -89,6 +89,6 @@ for i in range(N1):
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.995,left=0.065,right=0.995)
 # fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
-fig.savefig('examples_3x3_updated.pdf')
+# fig.savefig('examples_3x3_updated.pdf')
 
 show()
