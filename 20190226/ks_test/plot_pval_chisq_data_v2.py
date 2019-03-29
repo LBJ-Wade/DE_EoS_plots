@@ -6,6 +6,10 @@ idx_good = n_cross[:,0] <= 0
 idx_bad1 = n_cross[:,0] >= 1
 idx_bad2 = n_cross[:,1] >= 1
 
+print('sum(idx_good) = ', sum(idx_good))
+print('sum(idx_bad1) = ', sum(idx_bad1))
+print('sum(idx_bad2) = ', sum(idx_bad2))
+
 p = loadtxt('p_all.txt')
 
 p_all = p[:,0]
@@ -41,7 +45,7 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot
-axScatter.scatter(p_all[idx_good],chi2_data[idx_good],marker='o',s=15,color='gray',alpha=1,label='deviation from $w=-1$ less than $1\sigma$ ')
+axScatter.scatter(p_all[idx_good],chi2_data[idx_good],marker='o',s=15,color='gray',alpha=0.65,label='deviation from $w=-1$ less than $1\sigma$ ')
 # axScatter.scatter(p_all,chi2_data,marker='o',s=20,color='gray',alpha=0.25)
 axScatter.scatter(p_all[idx_bad1],chi2_data[idx_bad1],marker='+',s=35,color='b',label=r'deviation from $w=-1$ by $\gtrsim 1\sigma$ ',alpha=0.75)
 axScatter.scatter(p_all[idx_bad2],chi2_data[idx_bad2],marker='o',s=20,color='r',label=r'deviation from $w=-1$ by $\gtrsim 2\sigma$ ',alpha=0.75)
@@ -51,7 +55,7 @@ axScatter.set_ylabel(r'$\chi^2_{\rm data}$',fontsize=14)
 axScatter.set_ylim(675,975)
 axScatter.tick_params(axis='both',direction='in')
 
-lgd=axScatter.legend(loc='upper left',frameon=False)
+lgd=axScatter.legend(loc='upper right',frameon=False)
 texts = lgd.get_texts()
 setp(texts[0],fontsize=11,color='gray')
 setp(texts[1],fontsize=11,color='b')
@@ -62,13 +66,13 @@ bins=30
 # axHistx.hist(p_all[idx_good],bins=bins,histtype='step',linewidth=2,color='r',alpha=0.65)
 
 p_stack = []
-p_stack.append(p_all[idx_good])
-p_stack.append(p_all[idx_bad1])
 p_stack.append(p_all[idx_bad2])
+p_stack.append(p_all[idx_bad1])
+p_stack.append(p_all[idx_good])
 
 alpha=0.65
 
-axHistx.hist(p_stack,bins=bins,histtype='bar',linewidth=2,color=['gray','b','r'],stacked=True,alpha=alpha)
+axHistx.hist(p_stack,bins=bins,histtype='bar',linewidth=2,color=['r','b','gray'],stacked=True,alpha=alpha)
 
 axHistx.set_xlim(axHistx.get_xlim())
 axHistx.set_ylim(axHistx.get_ylim())
@@ -76,11 +80,11 @@ axHistx.set_yticks([])
 axHistx.tick_params(axis='x',direction='in')
 
 chi2_data_stack = []
-chi2_data_stack.append(chi2_data[idx_good])
-chi2_data_stack.append(chi2_data[idx_bad1])
 chi2_data_stack.append(chi2_data[idx_bad2])
+chi2_data_stack.append(chi2_data[idx_bad1])
+chi2_data_stack.append(chi2_data[idx_good])
 
-axHisty.hist(chi2_data_stack,bins=bins,histtype='bar',linewidth=2,color=['gray','b','r'],orientation='horizontal',stacked=True,alpha=alpha)
+axHisty.hist(chi2_data_stack,bins=bins,histtype='bar',linewidth=2,color=['r','b','gray'],orientation='horizontal',stacked=True,alpha=alpha)
 axHisty.set_xticks([])
 axHisty.set_ylim(675,975)
 axHisty.tick_params(axis='y',direction='in')

@@ -7,8 +7,12 @@ colors = ['r','b']
 a = linspace(1,0.4,20)
 z = 1/a-1
 
-w = loadtxt('wmap9_snls3_bao_hz_h0_a_2.0_sm_0.04.txt')
-wd = loadtxt('wmap9dp_snls3_bao_h0_hz_a_2.0_sm_0.04.txt')
+# w = loadtxt('wmap9_snls3_bao_hz_h0_a_2.0_sm_0.04.txt')
+# wd = loadtxt('wmap9dp_snls3_bao_h0_hz_a_2.0_sm_0.04.txt')
+
+# updated reconstruction results
+w = loadtxt('eos_WMAP9_SNLS3_HZ_BAO_H0.txt')
+wd = loadtxt('eos_fiducial.txt')
 
 dz = 0.00
 
@@ -59,6 +63,6 @@ plt.setp(texts[1],fontsize=14,color=colors[1])
 
 fig.subplots_adjust(top=0.995,bottom=0.125,left=0.125,right=0.975)
 
-# savefig('w_results_2012.pdf')
+savefig('w_results_2012.pdf')
 
 show()
