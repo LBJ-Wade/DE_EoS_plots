@@ -26,10 +26,10 @@ ax = fig.add_subplot(111)
 
 ax.errorbar(z-dz,wd[:,0],yerr=[wd[:,0]-wd[:,2],wd[:,3]-wd[:,0]],
 	marker='o',markersize=5,capsize=4,capthick=2,color=colors[1],
-	label=r'D12-DP')
+	label=r'JD12$\ast$')
 
 
-ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],label=r'D12',alpha=0.3)
+ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],label=r'JD12',alpha=0.3)
 ax.plot(z,w[:,0],ls='-',lw=2,color=colors[0],alpha=0.75)
 ax.plot(z,w[:,2],ls='-',lw=1,color=colors[0],alpha=0.75)
 ax.plot(z,w[:,3],ls='-',lw=1,color=colors[0],alpha=0.75)
