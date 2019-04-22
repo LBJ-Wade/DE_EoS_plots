@@ -23,6 +23,7 @@ hist(chi2_diff_a,bins=30,histtype='bar',rwidth=0.85,color='r',alpha=0.75,label=r
 
 legend(loc='best',frameon=False,fontsize=12)
 xlabel(r'$\Delta \chi^2$',fontsize=12)
+ylabel(r'Counts',fontsize=12)
 tick_params(axis='both',direction='in')
 
 # plot(chi2_prior,chi2_diff_b,'ro')

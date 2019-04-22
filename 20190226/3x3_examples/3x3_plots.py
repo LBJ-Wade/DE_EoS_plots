@@ -8,11 +8,11 @@ z = 1/a-1
 
 colors=['r','g','b']
 
-EoS_dir = 'post/EoS'
-EoS_inv_dir = 'post_inv_err/EoS'
+#EoS_dir = 'post/EoS'
+#EoS_inv_dir = 'post_inv_err/EoS'
 
-EoS_no_err_dir = 'post_no_err_sm_0.04/EoS'
-EoS_no_err_dir2 = 'post_no_err_sm_0.1/EoS'
+EoS_dir = 'post_no_extra_w/EoS'
+EoS_inv_dir = 'post_no_extra_w_inv_err/EoS'
 
 fig = figure(figsize=(10,6))
 
@@ -43,30 +43,20 @@ for i in range(N1):
         ax = fig.add_subplot(N1,N2,cnt)
         ax.tick_params(axis='both',direction='in')
 
-        if cnt < 9:
-            w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25)
-            ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
-            ax.plot(z,w[:,2],color=colors[0],ls='-',alpha=0.75)
-            ax.plot(z,w[:,3],color=colors[0],ls='-',alpha=0.75)
+        w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
+        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.25)
+        ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
+        ax.plot(z,w[:,2],color=colors[0],ls='-',alpha=0.75)
+        ax.plot(z,w[:,3],color=colors[0],ls='-',alpha=0.75)
 
-            w = loadtxt(EoS_inv_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25,label='Error inverted')
-            ax.plot(z,w[:,0],color=colors[1],ls='--',alpha=0.75)
-            ax.plot(z,w[:,2],color=colors[1],ls='--',alpha=0.75)
-            ax.plot(z,w[:,3],color=colors[1],ls='--',alpha=0.75)
+        w = loadtxt(EoS_inv_dir+'/eos_'+str(ids[cnt-1])+'.txt')
+        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25,label='Error inverted')
+        ax.plot(z,w[:,0],color=colors[1],ls='--',alpha=0.75)
+        ax.plot(z,w[:,2],color=colors[1],ls='--',alpha=0.75)
+        ax.plot(z,w[:,3],color=colors[1],ls='--',alpha=0.75)
 
-            if cnt == 1:
-            	ax.legend(loc='lower left',frameon=False)
-        else:
-            w = loadtxt(EoS_no_err_dir+'/eos_1.txt')
-            w_peak = loadtxt(EoS_no_err_dir+'/EoS_1_w_peak_vals.txt')
-            ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[2],alpha=0.25,label=r'Ideal mock dataset: $\Delta \bf{d}=0$')
-            # ax.plot(z,w[:,0],color=colors[0],ls='-',alpha=0.75)
-            ax.plot(z,w_peak,color=colors[2],ls='-.',lw=2,alpha=0.75)
-            ax.plot(z,w[:,2],color=colors[2],ls='-',lw=2,alpha=0.75)
-            ax.plot(z,w[:,3],color=colors[2],ls='-',lw=2,alpha=0.75)
-            ax.legend(loc='upper left',frameon=False)
+        if cnt == 1:
+        	ax.legend(loc='lower left',frameon=False)
 
         ax.hlines(-1,xmin=0,xmax=zmax,linestyles='dashed',linewidth=1)
         ax.set_ylim(-2.15,0.15)
@@ -94,6 +84,6 @@ for i in range(N1):
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.995,left=0.065,right=0.995)
 # fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
-fig.savefig('examples_3x3_updated1.pdf')
+fig.savefig('examples_3x3_20190422.pdf')
 
 show()
