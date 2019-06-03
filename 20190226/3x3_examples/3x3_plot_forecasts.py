@@ -1,15 +1,23 @@
 import sys
 from pylab import *
 
+#zmax=2.5
+#amin=1/(1+zmax)
+#a = linspace(1,amin,30)
+#z = 1/a-1
+
 zmax=2.5
 amin=1/(1+zmax)
-a = linspace(1,amin,30)
+a = linspace(1,amin,29)
+a = list(a)
+a.append(1/1101)
+a = array(a)
 z = 1/a-1
 
-colors=['r','b','g']
+colors=['r','g','b']
 
-EoS_dir = 'post/EoS'
-EoS_dir2 = 'post_forecast/EoS'
+EoS_dir = 'post_process_piecewise-const/EoS'
+EoS_dir2 = 'post_process_forecast/EoS'
 
 fig = figure(figsize=(10,6))
 
@@ -54,13 +62,13 @@ for i in range(N1):
 
         # print('@debug --> cnt = %4d'%(cnt))
         w = loadtxt(EoS_dir+'/eos_'+str(ids[cnt-1])+'.txt')
-        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.2,label='Current constraints')
+        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],alpha=0.3,label='Current constraints')
         ax.plot(z,w[:,0],color=colors[0],ls='--',alpha=0.35)
         # ax.plot(z,w[:,2],color=colors[0],ls='--',alpha=0.35)
         # ax.plot(z,w[:,3],color=colors[0],ls='--',alpha=0.35)
 
         w = loadtxt(EoS_dir2+'/eos_'+str(ids[cnt-1])+'.txt')
-        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.25,label='Future constraints')
+        ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[1],alpha=0.3,label='Future constraints')
         ax.plot(z,w[:,0],color=colors[1],ls='-',alpha=0.5)
         # ax.plot(z,w[:,2],color=colors[1],ls='-',alpha=0.5)
         # ax.plot(z,w[:,3],color=colors[1],ls='-',alpha=0.5)
@@ -93,6 +101,6 @@ for i in range(N1):
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.995,left=0.065,right=0.995)
 # fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
-#fig.savefig('examples_3x3_forecasts_new.pdf')
+fig.savefig('examples_3x3_forecasts_20190526.pdf')
 
 show()

@@ -18,16 +18,16 @@ def read_JLA_mock( mock_filename ):
 
 	return np.array(snls3)
 
-# Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_Hz.txt')
-Hz_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/fiducial/classmc_test_20190220_Hz.txt')
-Hz_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_80_Hz.txt')
+# Hz_best_fit_lcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_Hz.txt')
+Hz_best_fit_lcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/fiducial/classmc_test_20190220_Hz.txt')
+Hz_best_fit_wzcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_80_Hz.txt')
 Hz_lcdm = interp1d(Hz_best_fit_lcdm[:,0],Hz_best_fit_lcdm[:,1])
 Hz_wzcdm = interp1d(Hz_best_fit_wzcdm[:,0],Hz_best_fit_wzcdm[:,1])
 
 
-# bao_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_BAO.txt')
-bao_best_fit_lcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/fiducial/classmc_test_20190220_BAO.txt')
-bao_best_fit_wzcdm = loadtxt('/Users/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_80_BAO.txt')
+# bao_best_fit_lcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/best_fit/LCDM_id_54_BAO.txt')
+bao_best_fit_lcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/fiducial/classmc_test_20190220_BAO.txt')
+bao_best_fit_wzcdm = loadtxt('/home/xyh/GitHub/ClassMC-dev/best_fit/wzCDM_id_80_BAO.txt')
 DA_lcdm = interp1d(bao_best_fit_lcdm[:,0],bao_best_fit_lcdm[:,6])
 DA_wzcdm = interp1d(bao_best_fit_wzcdm[:,0],bao_best_fit_wzcdm[:,6])
 
@@ -45,11 +45,15 @@ colors = ['gray','g','c']
 rd_fid_lcdm = 150.617
 rd_fid_wzcdm = 150.586
 
-bao_dr12 = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_80.dat')
-DA_lya = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_z2.34/LyAlpha_80.dat')
+bao_dr12 = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_Dr12_BAO_20190226/DR12_80.dat')
+DA_lya = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_z2.34/LyAlpha_80.dat')
+
+bao_6df = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_6dF_20190423/6dF_80.dat')
+bao_mgs = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenBAOs/mock_MGS_20190423/MGS_80.dat')
+
 
 MB = -1.9271020E+01
-sn_data = read_JLA_mock('/Users/xyh/GitHub/ClassMC-dev/mock_samples/mock_JLA_20190227_full_cov/MOCK_JLA_80.txt')
+sn_data = read_JLA_mock('/home/xyh/GitHub/ClassMC-dev/mock_samples/mock_JLA_20190227_full_cov/MOCK_JLA_80.txt')
 sn_z = sn_data[:,0]
 sn_mu = sn_data[:,1] + (MB+19.3)
 sn_DL = 10**(sn_mu/5)*1e-5
@@ -88,7 +92,7 @@ bao_dr12_Hz_err = loadtxt('BAO_DA_rs_std.txt')
 bao_dr12_Hz_err /= rd_fid_lcdm
 
 
-Hz_data = loadtxt('/Users/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/mock_Hz_20190226/Hz_80.dat')
+Hz_data = loadtxt('/home/xyh/GitHub/ClassMC-dev/mock_samples/GenHz/mock_Hz_20190226/Hz_80.dat')
 Hz_z = Hz_data[:,0]
 idx = Hz_z < 2.34
 idx0 = Hz_z>=2.34
