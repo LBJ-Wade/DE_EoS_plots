@@ -9,38 +9,37 @@ zmax=2.5
 a = linspace(1,1/(1+zmax),30)
 z = 1/a-1
 
-zz = array([0.0125, 0.0384, 0.0656, 0.0943, 0.1247, 0.1567, 0.1906, 0.2266, 0.2648, 0.3055,
- 0.3488, 0.3952, 0.4448, 0.4982, 0.5556, 0.6175, 0.6846, 0.7576, 0.8371, 0.9242,
- 1.0199, 1.1257, 1.2431, 1.3743, 1.5217, 1.6887, 1.8794, 2.0992, 2.3554, 2.5])
+#zz = array([0.0125, 0.0384, 0.0656, 0.0943, 0.1247, 0.1567, 0.1906, 0.2266, 0.2648, 0.3055,
+# 0.3488, 0.3952, 0.4448, 0.4982, 0.5556, 0.6175, 0.6846, 0.7576, 0.8371, 0.9242,
+# 1.0199, 1.1257, 1.2431, 1.3743, 1.5217, 1.6887, 1.8794, 2.0992, 2.3554, 2.5])
 
-# w = loadtxt('eos_PLK15_JLA_DR12BAO_Hz_HST.txt')
-# w = loadtxt('eos_yy.txt')
-w = loadtxt('eos_8-9.txt')
-#wd = loadtxt('eos_13_14.txt')
-# wd = loadtxt('eos_8-9.txt')
-wd = loadtxt('eos_plk15_dist.txt')
-
-wb = loadtxt('plk15-dp-best-fit-w.txt')
+w = loadtxt('EOS_full.txt')
+wd = loadtxt('EOS_ref_0523_x2.txt')
 
 fig = figure(figsize=(6,4))
 
 ax = fig.add_subplot(1,1,1)
 
-ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],label=r'JD16',alpha=0.3)
+
+#############################################################################################
+#ax.fill_between(z,y1=w[:,2],y2=w[:,3],color=colors[0],label=r'JD16',alpha=0.3)
+#ax.plot(z,w[:,0],ls='-',lw=2,color=colors[0],alpha=0.75)
+#ax.plot(z,w[:,2],ls='-',lw=1,color=colors[0],alpha=0.75)
+#ax.plot(z,w[:,3],ls='-',lw=1,color=colors[0],alpha=0.75)
+
+#ax.errorbar(z,wd[:,0],yerr=[wd[:,0]-wd[:,2],wd[:,3]-wd[:,0]],label=r'JD16$\ast$',fmt='s-',ms=5,capsize=3,capthick=2,color=colors[1],alpha=0.75)
+
+#############################################################################################
+ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],color=colors[0],label=r'JD16',alpha=0.3)
 ax.plot(z,w[:,0],ls='-',lw=2,color=colors[0],alpha=0.75)
-ax.plot(z,w[:,2],ls='-',lw=1,color=colors[0],alpha=0.75)
-ax.plot(z,w[:,3],ls='-',lw=1,color=colors[0],alpha=0.75)
+ax.plot(z,w[:,0]-w[:,1],ls='-',lw=1,color=colors[0],alpha=0.75)
+ax.plot(z,w[:,0]+w[:,1],ls='-',lw=1,color=colors[0],alpha=0.75)
+#ax.plot(z,w[:,2],ls=':',lw=1,color=colors[0],alpha=0.5)
+#ax.plot(z,w[:,3],ls=':',lw=1,color=colors[0],alpha=0.5)
 
-
-#ax.fill_between(zz,y1=w[:,2],y2=w[:,3],color=colors[1],label=r'JD16$\ast$',alpha=0.3)
-#ax.plot(zz,w[:,0],ls='--',lw=2,color=colors[1],alpha=0.75)
-#ax.plot(zz,w[:,2],ls='--',lw=1,color=colors[1],alpha=0.75)
-#ax.plot(zz,w[:,3],ls='--',lw=1,color=colors[1],alpha=0.75)
-
-#ax.errorbar(zz,w[:,0],yerr=[w[:,0]-w[:,2],w[:,3]-w[:,0]],label=r'JD16$\ast$',fmt='s-',ms=5,capsize=3,capthick=2,color=colors[1],alpha=0.75)
-#ax.plot(zz,wb,'g-',lw=5,alpha=0.75)
-
-ax.errorbar(zz,wb,yerr=[wb-w[:,2],w[:,3]-wb],label=r'JD16$\ast$',fmt='s-',ms=5,capsize=3,capthick=2,color=colors[1],alpha=0.75)
+ax.errorbar(z,wd[:,0],yerr=wd[:,1],label=r'JD16$^{\ast}$',fmt='s-',ms=5,capsize=3,capthick=2,color=colors[1],alpha=0.75)
+#ax.plot(z,wd[:,2],ls='--',lw=1,color=colors[1],alpha=0.5)
+#ax.plot(z,wd[:,3],ls='--',lw=1,color=colors[1],alpha=0.5)
 
 ax.hlines(-1,xmin=0.0,xmax=zmax,linestyle='dashed',color='k',lw=2,alpha=0.5)
 
@@ -66,5 +65,6 @@ plt.setp(texts[1],fontsize=14,color=colors[1])
 fig.subplots_adjust(top=0.995,bottom=0.125,left=0.125,right=0.975)
 
 savefig('w_results_2016.pdf')
+#savefig('w_results_2016_two_tails.pdf')
 
 show()

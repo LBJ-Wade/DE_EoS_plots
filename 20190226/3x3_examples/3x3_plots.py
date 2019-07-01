@@ -9,7 +9,7 @@ a.append(1/1101)
 a = array(a)
 z = 1/a-1
 
-colors=['r','g','b']
+colors=['r','b','g']
 
 #EoS_dir = 'post/EoS'
 #EoS_inv_dir = 'post_inv_err/EoS'

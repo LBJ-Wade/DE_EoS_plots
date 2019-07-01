@@ -68,7 +68,7 @@ bao_dr12_DA_err *= rd_fid_lcdm
 
 ax = fig.add_subplot(2,1,1)
 
-ax.plot(z_ref,DA_lcdm(z_ref)/DA_lcdm(z_ref),'b--',lw=2)
+ax.plot(z_ref,DA_lcdm(z_ref)/DA_lcdm(z_ref),'k--',lw=2)
 ax.plot(z_ref,DA_wzcdm(z_ref)/DA_lcdm(z_ref),'r-',lw=2)
 ax.plot(sn_z,sn_DA/DA_lcdm(sn_z),'.',color=colors[0],alpha=0.5,label='JLA SNe Ia')
 ax.errorbar(bao_z,bao_dr12_DA/DA_lcdm(bao_z),yerr=bao_dr12_DA_err/DA_lcdm(bao_z),fmt='o',color=colors[1],label=r'DR12 BAO')
@@ -98,7 +98,7 @@ idx = Hz_z < 2.34
 idx0 = Hz_z>=2.34
 
 ax = fig.add_subplot(2,1,2)
-ax.plot(z_ref,Hz_lcdm(z_ref)/Hz_lcdm(z_ref),'b--',lw=2)
+ax.plot(z_ref,Hz_lcdm(z_ref)/Hz_lcdm(z_ref),'k--',lw=2)
 ax.plot(z_ref,Hz_wzcdm(z_ref)/Hz_lcdm(z_ref),'r-',lw=2)
 ax.errorbar(Hz_z[idx],Hz_data[idx,1]/Hz_lcdm(Hz_z[idx]),yerr=Hz_data[idx,2]/Hz_lcdm(Hz_z[idx]),fmt='o',color=colors[0],label='OHD')
 ax.errorbar(bao_z,bao_dr12_Hz/Hz_lcdm(bao_z),yerr=bao_dr12_Hz_err/Hz_lcdm(bao_z),fmt='d',color=colors[1],label=r'DR12 BAO')
@@ -119,8 +119,8 @@ ax.legend(loc='upper right',ncol=1,frameon=True,fontsize=12)
 ax.tick_params(axis='both',direction='in')
 # ax.grid(linestyle='dashed')
 
-fig.subplots_adjust(top=0.995,left=0.125,right=0.975,bottom=0.1,hspace=0)
+fig.subplots_adjust(top=0.985,left=0.125,right=0.975,bottom=0.1,hspace=0)
 
-fig.savefig('example_fit_BAO_Hz_id_80.pdf')
+fig.savefig('example_fit_BAO_Hz.pdf')
 
 show()

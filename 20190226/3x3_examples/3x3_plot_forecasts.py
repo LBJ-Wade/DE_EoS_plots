@@ -14,7 +14,7 @@ a.append(1/1101)
 a = array(a)
 z = 1/a-1
 
-colors=['r','g','b']
+colors=['r','b','g']
 
 EoS_dir = 'post_process_piecewise-const/EoS'
 EoS_dir2 = 'post_process_forecast/EoS'
