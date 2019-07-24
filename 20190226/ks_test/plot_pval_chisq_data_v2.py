@@ -27,7 +27,8 @@ p_all = p[:,0]
 p_sne = p[:,1]
 
 
-chi2 = loadtxt('chisq.txt')
+#chi2 = loadtxt('chisq.txt')
+chi2 = loadtxt('combined_chisq.txt')
 chi2_tot = chi2[:,0]
 chi2_prior = chi2[:,1]
 chi2_data  = chi2[:,2]
@@ -58,22 +59,12 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 # the scatter plot: p vs chisq_tot
-#axScatter.scatter(p_all[idx_good],chi2_tot[idx_good],marker='x',s=20,color=colors[0],alpha=0.65,label='deviation from $w=-1$ less than $1\sigma$ ')
-#axScatter.scatter(p_all[idx_bad1],chi2_tot[idx_bad1],marker='+',s=35,color=colors[1],label=r'deviation from $w=-1$ by $\gtrsim 1\sigma$ ',alpha=0.5)
-#axScatter.scatter(p_all[idx_bad2],chi2_tot[idx_bad2],marker='o',s=20,color='',edgecolors=colors[2],label=r'deviation from $w=-1$ by $\gtrsim 2\sigma$ ',alpha=1)
-#axScatter.scatter(p_all[79],chi2_tot[79],marker='*',s=150,linewidths=1.5,color='',edgecolors='k')
-
-axScatter.scatter(p_all[idx_good],chi2_tot[idx_good],marker='x',s=20,color=colors[0],alpha=0.65)
-axScatter.scatter(p_all[idx_bad1],chi2_tot[idx_bad1],marker='+',s=35,color=colors[1],alpha=0.5)
-axScatter.scatter(p_all[idx_bad2],chi2_tot[idx_bad2],marker='o',s=20,color='',edgecolors=colors[2],alpha=1)
+axScatter.scatter(p_all[idx_good],chi2_tot[idx_good],marker='x',s=20,color=colors[0],alpha=0.65,label=r'all $w_i$: $< 1\sigma$')
+axScatter.scatter(p_all[idx_bad1],chi2_tot[idx_bad1],marker='+',s=35,color=colors[1],alpha=0.50,label=r'at least one $w_i$: $\geq 1\sigma$ and $< 2\sigma$')
+axScatter.scatter(p_all[idx_bad2],chi2_tot[idx_bad2],marker='o',s=20,color='',edgecolors=colors[2],label=r'at least one $w_i$: $\geq 2\sigma$',alpha=1)
 axScatter.scatter(p_all[79],chi2_tot[79],marker='*',s=150,linewidths=1.5,color='',edgecolors='k')
 
-DY=25
-axScatter.text(0.0,975+DY,r'deviations of $\{w_i\}$ from $w=-1$:',fontsize=12)
-axScatter.text(0.4,950+DY,r'all $< 1\sigma$',fontsize=11,color=colors[0])
-axScatter.text(0.4,925+DY,r'at least one $> 1\sigma$ and $< 2\sigma$',fontsize=11,color=colors[1])
-axScatter.text(0.4,900+DY,r'at least one $> 2\sigma$',fontsize=11,color=colors[2])
-
+DY = 0
 
 axScatter.set_xlabel(r'$p$',fontsize=14)
 axScatter.set_ylabel(r'$\chi^2_{\rm tot}$',fontsize=14)
@@ -81,11 +72,14 @@ axScatter.set_xlim(-0.025,1.025)
 axScatter.set_ylim(650,1000+DY)
 axScatter.tick_params(axis='both',direction='in')
 
-lgd=axScatter.legend(loc='upper right',frameon=False)
+lgd=axScatter.legend(loc='upper right',bbox_to_anchor=(1.015, 0.95),frameon=False)
 texts = lgd.get_texts()
-#setp(texts[0],fontsize=11,color='gray')
-#setp(texts[1],fontsize=11,color='b')
-#setp(texts[2],fontsize=11,color='r')
+setp(texts[0],fontsize=10,color=colors[0])
+setp(texts[1],fontsize=10,color=colors[1])
+setp(texts[2],fontsize=10,color=colors[2])
+
+axScatter.text(0.25,980+DY,r'Deviations from $w=-1$',fontsize=11)
+
 
 bins=30
 

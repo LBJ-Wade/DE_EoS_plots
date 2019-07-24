@@ -10,9 +10,14 @@ w_peak = loadtxt(EoS_no_err_dir+'/EoS_1_w_peak_vals.txt')
 p_all= '0.58'
 p_sn = '0.59'
 
-chisq_prior = 8.34348
-chisq_wzCDM = 838.823-chisq_prior
-chisq_lcdm = 841.459656
+#chisq_prior = 8.34348
+#chisq_wzCDM = 838.823-chisq_prior
+#chisq_lcdm = 841.459656
+
+chisq_prior = 1.47187
+chisq_wzCDM = 830.708-chisq_prior
+#chisq_lcdm = 841.459656
+chisq_lcdm = 836.303191
 
 zmax=2.5
 amin=1/(1+zmax)
@@ -26,26 +31,20 @@ fig = figure(figsize=(6,5))
 
 ax = fig.add_subplot(1,1,1)
 
-ax.fill_between(z,y1=w[:,2],y2=w[:,3],color='r',alpha=0.3,label=r'Reconstructed $w(z)$')
-#ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],color='r',alpha=0.3,label=r'Reconstructed $w(z)$')
-fill_between(z,y1=w_no_err[:,2],y2=w_no_err[:,3],color='b',alpha=0.25,label=r'Ideal mock dataset: $\Delta \bf{d}=0$')
-
-ax.plot(z,w[:,2],ls='-',color='r',lw=2,alpha=0.75)
-ax.plot(z,w[:,3],ls='-',color='r',lw=2,alpha=0.75)
-
-#ax.plot(z,w[:,0]-w[:,1],ls='-',color='r',lw=2,alpha=0.75)
-#ax.plot(z,w[:,0]+w[:,1],ls='-',color='r',lw=2,alpha=0.75)
-
+ax.fill_between(z,y1=w[:,0]-w[:,1],y2=w[:,0]+w[:,1],color='r',alpha=0.3,label=r'$\rm{\Lambda JD16^{\ast}}$')
 ax.plot(z,w[:,0],ls='-',color='r',lw=3)
-# ax.plot(z,w_bestfit,'-o',color='r',lw=3)
+ax.plot(z,w[:,0]-w[:,1],ls='-',color='r',lw=2,alpha=0.75)
+ax.plot(z,w[:,0]+w[:,1],ls='-',color='r',lw=2,alpha=0.75)
 
-# ax.fill_between(z,y1=wx[:,2],y2=wx[:,3],color='g',alpha=0.3,label=r'Reconstructed $w(z)$')
-
-plot(z,w_peak,color='b',ls='-.',lw=2,alpha=0.5)
+#ax.fill_between(z,y1=w_no_err[:,2],y2=w_no_err[:,3],color='gray',alpha=0.25,label=r'$\rm{\Lambda JD16^{\ast}}$ with $d=d^{\rm th}$')
+# ax.fill_between(z,y1=w_no_err[:,0]-w_no_err[:,1],y2=w_no_err[:,0]+w_no_err[:,1],color='gray',alpha=0.25,label=r'$\rm{\Lambda JD16^{\ast}}$ with $\mathbf{d}=\mathbf{d}^{\rm th}$')
+ax.fill_between(z,y1=w_peak-w_no_err[:,1],y2=w_peak+w_no_err[:,1],color='gray',alpha=0.25,label=r'$\rm{\Lambda JD16^{\ast}}$ with $\mathbf{d}=\mathbf{d}^{\rm th}$')
+plot(z,w_peak,color='gray',ls='-.',lw=2,alpha=0.5)
+# plot(z,w_no_err[:,0],color='gray',ls='--',lw=2,alpha=0.5)
 #plot(z,w_no_err[:,2],color='gray',ls='-',lw=2,alpha=0.25)
 #plot(z,w_no_err[:,3],color='gray',ls='-',lw=2,alpha=0.25)
 
-ax.hlines(-1,xmin=0,xmax=zmax,linestyles='--',colors='k',lw=2,label=r'Fiducial $w=-1$')
+ax.hlines(-1,xmin=0,xmax=zmax,linestyles='--',colors='k',lw=2)
 
 
 ax.set_xlim(0,zmax)
@@ -56,8 +55,8 @@ ax.set_ylabel(r'$w(z)$',fontsize=13)
 lgd=ax.legend(loc='upper left',frameon=False,fontsize=13)
 texts = lgd.get_texts()
 setp(texts[0],fontsize=14,color='r')
-setp(texts[1],fontsize=14,color='b')
-setp(texts[2],fontsize=14,color='k')
+setp(texts[1],fontsize=14,color='gray')
+#setp(texts[2],fontsize=14,color='k')
 
 dx = -1.3
 dy = -0.5
