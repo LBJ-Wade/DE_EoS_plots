@@ -31,9 +31,10 @@ p_sne = p[:,1]
 chi2_lcdm = loadtxt('combined_chisq_lcdm_updated.txt')
 chi2 = loadtxt('combined_chisq.txt')
 chi2_tot = chi2[:,0]
-chi2_prior = chi2[:,1]
-chi2_data  = chi2[:,2]
+chi2_prior = chi2[:,4]
+chi2_data  = chi2_tot-chi2_prior
 dchi2_tot = chi2[:,0]-chi2_lcdm[:,0]
+dchi2_data = chi2[:,0]-chi2_lcdm[:,0] -chi2_prior
 
 fig = figure(figsize=(8,5))
 
@@ -74,9 +75,6 @@ axHisty.xaxis.set_major_formatter(nullfmt)
 axHisty.yaxis.set_major_formatter(nullfmt)
 
 ## the scatter plot: p vs chisq_tot
-#axScatter1.scatter(chi2_tot[idx_good],p_all[idx_good],marker='x',s=20,color=colors[0],edgecolors='',alpha=0.45,label=r'$|1+w_i| < \sigma_{w_i}$ in all bins')
-#axScatter1.scatter(chi2_tot[idx_bad1],p_all[idx_bad1],marker='o',s=20,color=colors[1],edgecolors='',alpha=0.35,label=r'$\sigma_{w_i} \leq |1+w_i| < 2\sigma_{w_i}$ in at least one bin')
-#axScatter1.scatter(chi2_tot[idx_bad2],p_all[idx_bad2],marker='s',s=20,color=colors[2],edgecolors='',alpha=0.65,label=r'$|1+w_i| \geq 2\sigma_{w_i}$ in at least one bin')
 axScatter1.scatter(chi2_tot[idx_good],p_all[idx_good],marker='x',s=20,color=colors[0],edgecolors='',alpha=0.45,label=r'Weak-wiggle group')
 axScatter1.scatter(chi2_tot[idx_bad1],p_all[idx_bad1],marker='o',s=15,color=colors[1],edgecolors='',alpha=0.35,label=r'Moderate-wiggle group')
 axScatter1.scatter(chi2_tot[idx_bad2],p_all[idx_bad2],marker='s',s=20,color=colors[2],edgecolors='',alpha=0.65,label=r'Strong-wiggle group')
@@ -84,10 +82,11 @@ axScatter1.scatter(chi2_tot[79],p_all[79],marker='o',s=75,color='b')
 
 axScatter1.set_xlabel(r'$\chi^2_{\rm tot}$',fontsize=12)
 axScatter1.set_ylabel(r'$p$',fontsize=14)
-axScatter1.set_xlim(650,950)
+axScatter1.set_xlim(625,925)
 axScatter1.set_ylim(-0.05,1.05)
 axScatter1.tick_params(axis='both',direction='in')
-axScatter1.set_xticks([700,750,800,850,900])
+#axScatter1.set_xticks([700,750,800,850,900])
+axScatter1.set_xticks([675,725,775,825,875])
 axScatter1.text(0.1,0.95,'(a)',horizontalalignment='center',verticalalignment='center', transform=axScatter1.transAxes,fontsize=14)
 
 lgd=axScatter1.legend(loc='upper right',ncol=3,bbox_to_anchor=(2.25, 1.375),frameon=True,title_fontsize=13)
@@ -97,12 +96,12 @@ setp(texts[1],fontsize=12,color=colors[1])
 setp(texts[2],fontsize=12,color=colors[2])
 
 #############################################################
-axScatter2.scatter(dchi2_tot[idx_good],p_all[idx_good],marker='x',s=20,color=colors[0],edgecolors='',alpha=0.45)
-axScatter2.scatter(dchi2_tot[idx_bad1],p_all[idx_bad1],marker='o',s=15,color=colors[1],edgecolors='',alpha=0.35)
-axScatter2.scatter(dchi2_tot[idx_bad2],p_all[idx_bad2],marker='s',s=20,color=colors[2],edgecolors='',alpha=0.65)
-axScatter2.scatter(dchi2_tot[79],p_all[79],marker='o',s=75,color='b')
+axScatter2.scatter(dchi2_data[idx_good],p_all[idx_good],marker='x',s=20,color=colors[0],edgecolors='',alpha=0.45)
+axScatter2.scatter(dchi2_data[idx_bad1],p_all[idx_bad1],marker='o',s=15,color=colors[1],edgecolors='',alpha=0.35)
+axScatter2.scatter(dchi2_data[idx_bad2],p_all[idx_bad2],marker='s',s=20,color=colors[2],edgecolors='',alpha=0.65)
+axScatter2.scatter(dchi2_data[79],p_all[79],marker='o',s=75,color='b')
 
-axScatter2.set_xlabel(r'$\Delta\chi^2_{\rm tot}$',fontsize=12)
+axScatter2.set_xlabel(r'$\Delta\chi^2_{\rm data}$',fontsize=12)
 axScatter2.set_yticklabels([])
 axScatter2.tick_params(axis='both',direction='in')
 
@@ -123,10 +122,10 @@ chi2_tot_stack.append(chi2_tot[idx_good])
 chi2_tot_stack.append(chi2_tot[idx_bad1])
 chi2_tot_stack.append(chi2_tot[idx_bad2])
 
-dchi2_tot_stack = []
-dchi2_tot_stack.append(dchi2_tot[idx_good])
-dchi2_tot_stack.append(dchi2_tot[idx_bad1])
-dchi2_tot_stack.append(dchi2_tot[idx_bad2])
+dchi2_data_stack = []
+dchi2_data_stack.append(dchi2_data[idx_good])
+dchi2_data_stack.append(dchi2_data[idx_bad1])
+dchi2_data_stack.append(dchi2_data[idx_bad2])
 
 axHisty.hist(p_stack,bins=bins,histtype='bar',linewidth=2,color=colors,orientation='horizontal',stacked=True,alpha=alpha)
 axHisty.set_ylim(-0.05,1.05)
@@ -137,13 +136,13 @@ axHisty.text(0.825,0.95,'(c)',horizontalalignment='center',verticalalignment='ce
 ############################################################
 axHistx1.hist(chi2_tot_stack,bins=bins,histtype='bar',linewidth=2,color=colors,stacked=True,alpha=alpha)
 axHistx1.set_yticks([])
-axHistx1.set_xlim(650,950)
+axHistx1.set_xlim(625,925)
 axHistx1.tick_params(axis='both',direction='in')
 axHistx1.text(0.1,0.8,'(d)',horizontalalignment='center',verticalalignment='center', transform=axHistx1.transAxes,fontsize=14)
 
 ############################################################
 density_flag = False
-axHistx2.hist(dchi2_tot_stack,bins=bins,histtype='bar',linewidth=2,color=colors,stacked=True,alpha=alpha)
+axHistx2.hist(dchi2_data_stack,bins=bins,histtype='bar',linewidth=2,color=colors,stacked=True,alpha=alpha)
 
 axHistx2.set_yticks([])
 #axHistx2.set_xlim(650,950)
@@ -153,6 +152,6 @@ axHistx2.text(0.1,0.8,'(e)',horizontalalignment='center',verticalalignment='cent
 
 ############################################################
 
-fig.savefig('p_vs_chi2_tot_dchi2_tot.pdf')
+fig.savefig('p_vs_chi2_dchi2.pdf')
 
 show()

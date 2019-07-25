@@ -120,8 +120,9 @@ for i in range(N1):
         
         # add Delta chisq
 #        ax.text(0.1,-2,r'$\Delta\chi^2_{\rm tot} = $ ' + str(round(chisq_tot_tmp-chisq_lcdm_tmp,2)),fontsize=12,color='k')
-        ax.text(0.1,-2,r'$\Delta\chi^2_{\rm tot} = $ ' + str(round(dchisq_tot[k],2)),fontsize=12,color='k')
-
+#        ax.text(0.1,-2,r'$\Delta\chi^2_{\rm tot} = $ ' + str(round(dchisq_tot[k],2)),fontsize=12,color='k')
+        ax.text(0.1,-2,r'$\Delta\chi^2_{\rm data} = $ ' + str(round(dchisq_dat[k],2)),fontsize=12,color='k')
+        
         ax.set_xlim(0,2.5)
         if i == N1-1:
             xticks = [0,0.5,1.0,1.5,2]
@@ -142,6 +143,6 @@ for i in range(N1):
 fig.subplots_adjust(wspace=0,hspace=0,bottom=0.075,top=0.925,left=0.065,right=0.995)
 # fig.subplots_adjust(wspace=0,hspace=0,top=0.995,left=0.05,right=0.995)
 
-#fig.savefig('examples_3x3.pdf')
+fig.savefig('examples_3x3_dat.pdf')
 
 show()

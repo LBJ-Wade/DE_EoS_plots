@@ -65,10 +65,10 @@ ax.text(1.5+dx,-1.4+dy,r'$\Delta \chi^2_{\rm data}$',fontsize=15)
 ax.text(1.85+dx,-1.4+dy,r'$=$',fontsize=15)
 ax.text(1.9+dx,-1.4+dy,chisq_val,fontsize=15)
 
-chisq_val = ' %7.2f'%(chisq_prior+chisq_wzCDM-chisq_lcdm)
-ax.text(1.5+dx,-1.6+dy,r'$\Delta \chi^2_{\rm tot}$',fontsize=15)
-ax.text(1.85+dx,-1.6+dy,r'$=$',fontsize=15)
-ax.text(1.9+dx,-1.6+dy,chisq_val,fontsize=15)
+#chisq_val = ' %7.2f'%(chisq_prior+chisq_wzCDM-chisq_lcdm)
+#ax.text(1.5+dx,-1.6+dy,r'$\Delta \chi^2_{\rm tot}$',fontsize=15)
+#ax.text(1.85+dx,-1.6+dy,r'$=$',fontsize=15)
+#ax.text(1.9+dx,-1.6+dy,chisq_val,fontsize=15)
 
 
 #ax.text(0.15,-2.0,p_all+' (All)',fontsize=14)
@@ -87,7 +87,7 @@ ax.tick_params(axis='both',direction='in')
 fig.subplots_adjust(top=0.985,bottom=0.1,left=0.125,right=0.975)
 
 #fig.savefig('example_w_result_id_80_0604.pdf')
-fig.savefig('example_w_result.pdf')
+fig.savefig('example_w_result_dat.pdf')
 
 
 show()
